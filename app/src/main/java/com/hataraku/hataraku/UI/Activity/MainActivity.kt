@@ -1,4 +1,4 @@
-package com.hataraku.hataraku.UI
+package com.hataraku.hataraku.UI.Activity
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

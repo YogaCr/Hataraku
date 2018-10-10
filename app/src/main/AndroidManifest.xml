@@ -10,31 +10,35 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.MainActivity"></activity>
         <activity
-            android:name=".UI.RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".UI.Activity.MainActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".UI.Activity.RegisterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity
-            android:name=".UI.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".UI.LupaPasswordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        </activity>
-        <activity
-            android:name=".UI.ResetPasswordActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".UI.Activity.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".UI.Activity.LupaPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
+        <activity
+            android:name=".UI.Activity.ResetPasswordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.RegisterActivity">
+    tools:context=".UI.Activity.RegisterActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -79,6 +79,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button_auth"
             android:text="Daftar"
+            android:textStyle="bold"
             android:textAllCaps="false"
             android:textColor="#FFF" />
 
@@ -90,26 +91,23 @@
             app:isDarkTheme="false" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
+            android:layout_gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:text="Sudah Punya Akun? " />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/button_auth"
+            <TextView
+                android:id="@+id/btn_toLogin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Login"
-                android:textAllCaps="false"
-                android:textColor="#FFF" />
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
