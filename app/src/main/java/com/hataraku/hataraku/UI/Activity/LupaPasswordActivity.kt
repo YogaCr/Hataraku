@@ -1,5 +1,6 @@
 package com.hataraku.hataraku.UI.Activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.androidnetworking.AndroidNetworking
@@ -30,6 +31,11 @@ class LupaPasswordActivity : AppCompatActivity() {
 
                         }
                     })
+        }
+        btn_toResetPassword.setOnClickListener {
+            val intent = Intent(this, ResetPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
