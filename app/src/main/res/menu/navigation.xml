@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_global_projectFragment"
+        android:icon="@drawable/ic_book"
+        android:title="@string/title_project" />
+    <item
+        android:id="@+id/action_global_cariFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/title_cari" />
+    <item
+        android:id="@+id/action_global_profileFragment"
+        android:icon="@drawable/ic_person"
+        android:title="@string/title_profile" />
+</menu>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/projectFragment">
+
+    <fragment
+        android:id="@+id/projectFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.ProjectFragment"
+        android:label="fragment_project"
+        tools:layout="@layout/fragment_project" />
+    <fragment
+        android:id="@+id/cariFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.CariFragment"
+        android:label="fragment_cari"
+        tools:layout="@layout/fragment_cari" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <action
+        android:id="@+id/action_global_projectFragment"
+        app:destination="@id/projectFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_cariFragment"
+        app:destination="@id/cariFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+    <action
+        android:id="@+id/action_global_profileFragment"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+</navigation>
