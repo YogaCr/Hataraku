@@ -12,18 +12,10 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:destination="@id/registerFragment" />
         <action
             android:id="@+id/action_loginFragment_to_lupaPasswordFragment"
-            app:destination="@+id/lupaPasswordFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:destination="@+id/lupaPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/resetPasswordFragment"
@@ -37,11 +29,7 @@
         tools:layout="@layout/fragment_lupa_password">
         <action
             android:id="@+id/action_lupaPasswordFragment_to_resetPasseordFragment"
-            app:destination="@id/resetPasswordFragment"
-            app:enterAnim="@anim/slide_in_top"
-            app:exitAnim="@anim/slide_out_bottom"
-            app:popEnterAnim="@anim/slide_in_bottom"
-            app:popExitAnim="@anim/slide_out_top" />
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"

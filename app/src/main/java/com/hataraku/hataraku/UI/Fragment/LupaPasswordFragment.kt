@@ -1,5 +1,6 @@
 package com.hataraku.hataraku.UI.Fragment
 
+import Utilities.ApiEndPoint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -25,15 +26,17 @@ class LupaPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btn_lupa_password.setOnClickListener {
-            AndroidNetworking.post("")
+            AndroidNetworking.post(ApiEndPoint.AUTH_FORGOTPASS.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
+                    .addBodyParameter("email", et_email_lupa.text.toString())
                     .setPriority(Priority.HIGH)
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
 
                         }
+
                         override fun onError(anError: ANError?) {
 
                         }

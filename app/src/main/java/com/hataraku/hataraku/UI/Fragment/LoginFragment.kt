@@ -1,6 +1,8 @@
 package com.hataraku.hataraku.UI.Fragment
 
+import Utilities.ApiEndPoint
 import Utilities.Preferences
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -24,10 +26,10 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
 
 class LoginFragment : Fragment() {
-    lateinit var pref: SharedPreferences
-    lateinit var gso: GoogleSignInOptions
-    lateinit var googleSignInClient: GoogleSignInClient
-    val RC_SIGN_IN = 1
+    private lateinit var pref: SharedPreferences
+    private lateinit var gso: GoogleSignInOptions
+    private lateinit var googleSignInClient: GoogleSignInClient
+    private val RC_SIGN_IN = 1
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -59,10 +61,7 @@ class LoginFragment : Fragment() {
             findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
         }
         btn_login.setOnClickListener {
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
-            AndroidNetworking.post("")
+            AndroidNetworking.post(ApiEndPoint.AUTH_LOGIN.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
                     .addBodyParameter("email", et_email_login.text.toString())
@@ -71,8 +70,11 @@ class LoginFragment : Fragment() {
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
-
+                            val intent = Intent(context, MainActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
                         }
+
                         override fun onError(anError: ANError?) {
 
                         }
@@ -83,7 +85,7 @@ class LoginFragment : Fragment() {
         }
     }
 
-    fun signin() {
+    private fun signin() {
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
@@ -91,33 +93,35 @@ class LoginFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val account = task.getResult(ApiException::class.java)
-            AndroidNetworking.post("")
-                    .addHeaders("Content-Type", "application/json")
-                    .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
-                    .addBodyParameter("nama", account.displayName)
-                    .addBodyParameter("email", account.email)
-                    .setPriority(Priority.HIGH)
-                    .build()
-                    .getAsJSONObject(object : JSONObjectRequestListener {
-                        override fun onResponse(response: JSONObject?) {
+            if (resultCode == Activity.RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+                val account = task.getResult(ApiException::class.java)
+                AndroidNetworking.post(ApiEndPoint.AUTH_GOOGLE.value)
+                        .addHeaders("Content-Type", "application/json")
+                        .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
+                        .addBodyParameter("nama", account.displayName)
+                        .addBodyParameter("email", account.email)
+                        .setPriority(Priority.HIGH)
+                        .build()
+                        .getAsJSONObject(object : JSONObjectRequestListener {
+                            override fun onResponse(response: JSONObject?) {
 
-                        }
+                            }
 
-                        override fun onError(anError: ANError?) {
+                            override fun onError(anError: ANError?) {
 
-                        }
-                    })
-            googleSignInClient.signOut()
+                            }
+                        })
+                googleSignInClient.signOut()
 
-            /*val edit = pref.edit()
-            edit.putBoolean(Preferences.IS_LOGIN.name, true)
-            edit.apply()*/
+                /*val edit = pref.edit()
+                edit.putBoolean(Preferences.IS_LOGIN.name, true)
+                edit.apply()*/
 
-            val intent = Intent(context, MainActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+                val intent = Intent(context, MainActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
         }
     }
 }
