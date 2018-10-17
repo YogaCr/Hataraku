@@ -1,7 +1,7 @@
 package Utilities
 
 enum class ApiEndPoint(val value: String) {
-    BASE_URL("/"),
+    BASE_URL("http://api.yogacahya.me/api/"),
 
     //Auth
     AUTH_REGISTER(BASE_URL.value + "auth/register"),

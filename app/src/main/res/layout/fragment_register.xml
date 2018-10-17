@@ -64,31 +64,24 @@
         android:textColor="#FFF"
         android:textStyle="bold" />
 
-    <!--<com.shobhitpuri.custombuttons.GoogleSignInButton-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:text="@string/google_sign_up"-->
-    <!--app:isDarkTheme="false" />-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginTop="10dp"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:orientation="horizontal">-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sudah Punya Akun? " />
 
-    <!--<TextView-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Sudah Punya Akun? " />-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/btn_toLogin"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:text="Login"-->
-    <!--android:textStyle="bold" />-->
-    <!--</LinearLayout>-->
+        <TextView
+            android:id="@+id/btn_toLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

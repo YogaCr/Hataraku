@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupBottomNavMenu(navController: NavController) {
-        navigation?.let { bottomNavView ->
+        nav_bottom?.let { bottomNavView ->
             NavigationUI.setupWithNavController(bottomNavView, navController)
         }
     }

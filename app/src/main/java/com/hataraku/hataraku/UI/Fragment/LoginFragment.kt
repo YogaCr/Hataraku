@@ -61,6 +61,9 @@ class LoginFragment : Fragment() {
             findNavController(it).navigate(R.id.action_loginFragment_to_registerFragment)
         }
         btn_login.setOnClickListener {
+            val intent = Intent(context, MainActivity::class.java)
+            startActivity(intent)
+            activity?.finish()
             AndroidNetworking.post(ApiEndPoint.AUTH_LOGIN.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
@@ -70,9 +73,18 @@ class LoginFragment : Fragment() {
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            if (response?.has("message")!!) {
+
+                            } else {
+                                val pref = context!!.getSharedPreferences(Preferences.NAMA.name, Context.MODE_PRIVATE)
+                                val editor = pref.edit()
+                                editor.putString(Preferences.EMAIL.name, et_email_login.text.toString())
+                                editor.putString(Preferences.API_KEY.name, response.getString("api_token"))
+                                editor.apply()
+                                val intent = Intent(context, MainActivity::class.java)
+                                startActivity(intent)
+                                activity?.finish()
+                            }
                         }
 
                         override fun onError(anError: ANError?) {
