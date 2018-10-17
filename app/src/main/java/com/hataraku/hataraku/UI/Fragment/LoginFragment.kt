@@ -70,9 +70,18 @@ class LoginFragment : Fragment() {
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            if (response?.has("message")!!) {
+
+                            } else {
+                                val pref = context!!.getSharedPreferences(Preferences.NAMA.name, Context.MODE_PRIVATE)
+                                val editor = pref.edit()
+                                editor.putString(Preferences.EMAIL.name, et_email_login.text.toString())
+                                editor.putString(Preferences.API_KEY.name, response.getString("api_token"))
+                                editor.apply()
+                                val intent = Intent(context, MainActivity::class.java)
+                                startActivity(intent)
+                                activity?.finish()
+                            }
                         }
 
                         override fun onError(anError: ANError?) {

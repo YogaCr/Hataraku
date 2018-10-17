@@ -4,5 +4,6 @@ enum class Preferences {
     HatarakuPreferences,
     IS_LOGIN,
     EMAIL,
-    NAMA
+    NAMA,
+    API_KEY
 }
