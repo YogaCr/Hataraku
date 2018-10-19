@@ -1,6 +1,5 @@
 package com.hataraku.hataraku.UI.Fragment
 
-import Utilities.ApiEndPoint
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +11,7 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.hataraku.hataraku.R
+import com.hataraku.hataraku.Utilities.ApiEndPoint
 import kotlinx.android.synthetic.main.fragment_lupa_password.*
 import org.json.JSONObject
 
@@ -28,7 +28,7 @@ class LupaPasswordFragment : Fragment() {
         btn_lupa_password.setOnClickListener {
             AndroidNetworking.post(ApiEndPoint.AUTH_FORGOTPASS.value)
                     .addHeaders("Content-Type", "application/json")
-                    .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
+                    .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                     .addBodyParameter("email", et_email_lupa.text.toString())
                     .setPriority(Priority.HIGH)
                     .build()

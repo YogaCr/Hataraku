@@ -1,7 +1,5 @@
 package com.hataraku.hataraku.UI.Fragment
 
-import Utilities.ApiEndPoint
-import Utilities.Preferences
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -17,6 +15,8 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.MainActivity
+import com.hataraku.hataraku.Utilities.ApiEndPoint
+import com.hataraku.hataraku.Utilities.Preferences
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.json.JSONObject
 
@@ -38,7 +38,7 @@ class RegisterFragment : Fragment() {
             Log.d("url", ApiEndPoint.AUTH_REGISTER.value)
             AndroidNetworking.post(ApiEndPoint.AUTH_REGISTER.value)
                     .addHeaders("Content-Type", "application/json")
-                    .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
+                    .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                     .addBodyParameter("nama", et_nama_register.text.toString())
                     .addBodyParameter("email", et_email_register.text.toString())
                     .addBodyParameter("password", et_password_register.text.toString())

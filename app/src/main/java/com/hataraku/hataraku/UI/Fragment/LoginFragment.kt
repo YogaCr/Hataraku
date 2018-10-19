@@ -1,7 +1,5 @@
 package com.hataraku.hataraku.UI.Fragment
 
-import Utilities.ApiEndPoint
-import Utilities.Preferences
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -22,6 +20,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.MainActivity
+import com.hataraku.hataraku.Utilities.ApiEndPoint
+import com.hataraku.hataraku.Utilities.Preferences
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
 
@@ -66,7 +66,7 @@ class LoginFragment : Fragment() {
             activity?.finish()
             AndroidNetworking.post(ApiEndPoint.AUTH_LOGIN.value)
                     .addHeaders("Content-Type", "application/json")
-                    .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
+                    .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                     .addBodyParameter("email", et_email_login.text.toString())
                     .addBodyParameter("password", et_pass_login.text.toString())
                     .setPriority(Priority.HIGH)

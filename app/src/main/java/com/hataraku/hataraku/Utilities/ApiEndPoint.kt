@@ -1,4 +1,4 @@
-package Utilities
+package com.hataraku.hataraku.Utilities
 
 enum class ApiEndPoint(val value: String) {
     BASE_URL("http://api.yogacahya.me/api/"),

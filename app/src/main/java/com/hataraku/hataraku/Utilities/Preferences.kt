@@ -1,4 +1,4 @@
-package Utilities
+package com.hataraku.hataraku.Utilities
 
 enum class Preferences {
     HatarakuPreferences,
