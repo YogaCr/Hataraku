@@ -110,7 +110,7 @@ class LoginFragment : Fragment() {
                 val account = task.getResult(ApiException::class.java)
                 AndroidNetworking.post(ApiEndPoint.AUTH_GOOGLE.value)
                         .addHeaders("Content-Type", "application/json")
-                        .addHeaders("X-API-Key", "8JDWKFC6AWZ2019LULUSUNBCWAWQCK56")
+                        .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                         .addBodyParameter("nama", account.displayName)
                         .addBodyParameter("email", account.email)
                         .setPriority(Priority.HIGH)

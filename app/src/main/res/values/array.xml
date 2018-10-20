@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="judul">
+        <item>Bangunan</item>
+    </string-array>
+    <string-array name="kategori">
+
+    </string-array>
+    <string-array name="foto">
+
+    </string-array>
+    <string-array name="tgl">
+
+    </string-array>
+</resources>
