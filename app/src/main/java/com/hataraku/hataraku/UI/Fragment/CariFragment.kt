@@ -42,10 +42,10 @@ class CariFragment : Fragment() {
     private fun addLowongan() {
         var x = 10
         val lowongan_dummy: LowonganModel = LowonganModel(
-                "Pembangunan Gazebo", "Bangunan", "22-09-2018"
+                "Pembangunan Gazebo", "Bangunan", "22-09-2018",
+                1000000.0, "Yoga Aranggi"
         )
         while (x > 0){
-
             lowongan.add(lowongan_dummy)
             x--
         }
