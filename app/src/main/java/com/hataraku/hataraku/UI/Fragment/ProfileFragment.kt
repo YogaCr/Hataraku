@@ -23,6 +23,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        activity?.title = "Profil"
         addTransaksi()
         rv_transaksi.layoutManager = LinearLayoutManager(context)
         rv_transaksi.adapter = TransaksiAdapter(transaksi, context)

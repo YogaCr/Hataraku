@@ -28,7 +28,7 @@ class ProjectFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        activity?.title = "Proyek"
         viewPager = view.findViewById(R.id.slider_pager) as ViewPager
         indicator = view.findViewById(R.id.indicator) as TabLayout
 

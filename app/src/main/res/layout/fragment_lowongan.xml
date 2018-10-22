@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UI.Fragment.LowonganFragment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="8dp">
+
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -34,7 +36,8 @@
                         android:id="@+id/et_kategori"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none"
+                        android:editable="false"
+                        android:focusable="false"
                         android:hint="Kategori" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -134,9 +137,8 @@
                     android:id="@+id/et_tglBatas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:inputType="none"
-                    android:focusable="true"
+                    android:editable="false"
+                    android:focusable="false"
                     android:hint="20-09-2018" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -163,17 +165,18 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Jl. In aja dulu"/>
+                    android:hint="Jl. In aja dulu" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <Button
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:background="@drawable/button_auth"
-            android:textColor="@android:color/white"
+            android:text="Post Lowongan"
             android:textAllCaps="false"
-            android:textStyle="bold"
-            android:text="Post Lowongan"/>
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

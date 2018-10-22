@@ -37,6 +37,7 @@ class CariFragment : Fragment() {
         addLowongan()
         rv_lowongan.layoutManager = LinearLayoutManager(context)
         rv_lowongan.adapter = LowonganAdapter(lowongan, context)
+        activity?.title = "Cari Lowongan"
     }
 
     private fun addLowongan() {
@@ -45,7 +46,7 @@ class CariFragment : Fragment() {
                 "Pembangunan Gazebo", "Bangunan", "22-09-2018",
                 1000000.0, "Yoga Aranggi"
         )
-        while (x > 0){
+        while (x > 0) {
             lowongan.add(lowongan_dummy)
             x--
         }
@@ -58,7 +59,7 @@ class CariFragment : Fragment() {
 
         searchView = searchItem.actionView as SearchView
 
-        if (searchView != null){
+        if (searchView != null) {
             searchView?.setSearchableInfo(
                     searchManager.getSearchableInfo(activity?.componentName))
 
@@ -67,6 +68,7 @@ class CariFragment : Fragment() {
                     Log.i("onQueryTextSubmit", query)
                     return true
                 }
+
                 override fun onQueryTextChange(newText: String): Boolean {
                     Log.i("onQueryTextChange", newText)
                     return true
@@ -79,7 +81,7 @@ class CariFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when (item?.getItemId()) {
+        when (item?.itemId) {
             R.id.action_search ->
                 // Not implemented here
                 return false
