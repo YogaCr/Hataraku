@@ -14,15 +14,15 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".UI$Activity.MainActivity"
+            android:name=".UI.Activity.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UI$Activity.AuthActivity"
+            android:name=".UI.Activity.AuthActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".UI$Activity.SplashActivity"
+        <activity android:name=".UI.Activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

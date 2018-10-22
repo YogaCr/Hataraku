@@ -9,7 +9,7 @@
         android:id="@+id/projectFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.ProjectFragment"
         android:label="fragment_project"
-        tools:layout="@layout/fragment_project" />
+        tools:layout="@layout/fragment_project" ><action android:id="@+id/action_projectFragment_to_lowonganFragment" app:destination="@id/lowonganFragment" app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/></fragment>
     <fragment
         android:id="@+id/cariFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.CariFragment"
@@ -20,25 +20,9 @@
         android:name="com.hataraku.hataraku.UI.Fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <action
-        android:id="@+id/action_global_projectFragment"
-        app:destination="@id/projectFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
-    <action
-        android:id="@+id/action_global_cariFragment"
-        app:destination="@id/cariFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
-    <action
-        android:id="@+id/action_global_profileFragment"
-        app:destination="@id/profileFragment"
-        app:enterAnim="@anim/slide_in_right"
-        app:exitAnim="@anim/slide_out_left"
-        app:popEnterAnim="@anim/slide_in_left"
-        app:popExitAnim="@anim/slide_out_right" />
+    <fragment
+        android:id="@+id/lowonganFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.LowonganFragment"
+        android:label="fragment_lowongan"
+        tools:layout="@layout/fragment_lowongan" />
 </navigation>

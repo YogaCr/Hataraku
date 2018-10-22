@@ -11,10 +11,6 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-    }
-
-    override fun onResume() {
-        super.onResume()
         thread(start = true) {
             try {
                 // Do any other initialization here
@@ -23,6 +19,7 @@ class SplashActivity : AppCompatActivity() {
                 e.printStackTrace()
             } finally {
                 startActivity(Intent(this, AuthActivity::class.java))
+                finish()
             }
         }
     }

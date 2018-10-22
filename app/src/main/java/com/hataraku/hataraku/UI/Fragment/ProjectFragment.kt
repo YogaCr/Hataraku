@@ -8,8 +8,10 @@ import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Adapter.SlideAdapter
+import kotlinx.android.synthetic.main.fragment_project.*
 import java.util.*
 
 class ProjectFragment : Fragment() {
@@ -30,6 +32,8 @@ class ProjectFragment : Fragment() {
         viewPager = view.findViewById(R.id.slider_pager) as ViewPager
         indicator = view.findViewById(R.id.indicator) as TabLayout
 
+        initProyek()
+
         val adapter = SlideAdapter(context)
         viewPager.adapter = adapter
         indicator.setupWithViewPager(viewPager, true)
@@ -48,5 +52,29 @@ class ProjectFragment : Fragment() {
                 handler.post(Update)
             }
         }, 3000, 3000)
+    }
+
+    private fun initProyek() {
+        var bundle = Bundle()
+        proyek_bangun.setOnClickListener {
+            bundle.putString("kategori", "Bangun")
+            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+        }
+        proyek_renov.setOnClickListener {
+            bundle.putString("kategori", "Renovasi")
+            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+        }
+        proyek_cat.setOnClickListener {
+            bundle.putString("kategori", "Cat")
+            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+        }
+        proyek_ledeng.setOnClickListener {
+            bundle.putString("kategori", "Ledeng")
+            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+        }
+        proyek_listrik.setOnClickListener {
+            bundle.putString("kategori", "Listrik")
+            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+        }
     }
 }
