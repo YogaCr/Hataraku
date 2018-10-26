@@ -89,6 +89,7 @@ class LoginFragment : Fragment() {
                             val editor = pref.edit()
                             editor.putString(Preferences.EMAIL.name, et_email_login.text.toString())
                             editor.putString(Preferences.API_KEY.name, response.getString("api_token"))
+                            editor.putString(Preferences.NAMA.name, response.getJSONObject("user").getString("nama"))
                             editor.putBoolean(Preferences.IS_LOGIN.name, true)
                             editor.apply()
                             val intent = Intent(context, MainActivity::class.java)

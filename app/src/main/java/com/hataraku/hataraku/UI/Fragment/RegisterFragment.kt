@@ -68,6 +68,7 @@ class RegisterFragment : Fragment() {
                             val editor = pref.edit()
                             editor.putString(Preferences.EMAIL.name, et_email_register.text.toString())
                             editor.putString(Preferences.API_KEY.name, response?.getString("api_token"))
+                            editor.putString(Preferences.NAMA.name, response?.getJSONObject("user")?.getString("nama"))
                             editor.apply()
                             val intent = Intent(context, MainActivity::class.java)
                             startActivity(intent)

@@ -1,18 +1,17 @@
 package com.hataraku.hataraku.UI.Fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.hataraku.hataraku.R
-import com.hataraku.hataraku.UI.Activity.MainActivity
 import com.hataraku.hataraku.Utilities.ApiEndPoint
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
 import es.dmoral.toasty.Toasty
@@ -47,9 +46,9 @@ class ResetPasswordFragment : Fragment() {
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            Toasty.success(context!!, "Berhasil mereset password", Toast.LENGTH_SHORT, true).show()
+                            Navigation.findNavController(it).navigateUp()
+
                         }
 
                         override fun onError(anError: ANError?) {
