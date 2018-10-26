@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:text="Register"
+        android:text="Daftarkan Diri Anda"
         android:textAlignment="center"
         android:textSize="12pt"
         android:textStyle="bold" />
@@ -53,35 +53,59 @@
         android:drawablePadding="20dp"
         android:inputType="textPassword" />
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_auth"
-        android:text="Daftar"
-        android:textAllCaps="false"
-        android:textColor="#FFF"
-        android:textStyle="bold" />
-
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp"
+        android:text="Konfirmasi Password" />
 
-        <TextView
-            android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/et_passconfirm_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_lock"
+        android:drawablePadding="20dp"
+        android:inputType="textPassword" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sudah Punya Akun? " />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/btn_toLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Login"
-            android:textStyle="bold" />
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_auth"
+                android:text="Daftar"
+                android:textAllCaps="false"
+                android:textColor="#FFF"
+                android:textStyle="bold" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sudah Punya Akun? " />
+
+                <TextView
+                    android:id="@+id/btn_toLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Login"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>

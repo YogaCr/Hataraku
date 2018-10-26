@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
@@ -17,6 +18,11 @@ import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.MainActivity
 import com.hataraku.hataraku.Utilities.ApiEndPoint
 import com.hataraku.hataraku.Utilities.Preferences
+import com.wajahatkarim3.easyvalidation.core.view_ktx.maxLength
+import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
+import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
+import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_register.*
 import org.json.JSONObject
 
@@ -35,7 +41,19 @@ class RegisterFragment : Fragment() {
         }
 
         btn_register.setOnClickListener {
-            Log.d("url", ApiEndPoint.AUTH_REGISTER.value)
+            if (et_email_register.validEmail().not()) {
+                et_email_register.error = "Tolong masukkan email dengan benar"
+                return@setOnClickListener
+            }
+            if (et_password_register.nonEmpty().not().and(et_password_register.minLength(6).not()).and(et_password_register.maxLength(12))) {
+                et_password_register.error = "Tolong masukkan password dengan benar"
+                return@setOnClickListener
+            }
+            if (!et_password_register.text.toString().equals(et_passconfirm_register.text.toString())) {
+                et_passconfirm_register.error = "Pastikan password sudah benar"
+                return@setOnClickListener
+            }
+//            Log.d("url", ApiEndPoint.AUTH_REGISTER.value)
             AndroidNetworking.post(ApiEndPoint.AUTH_REGISTER.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
@@ -57,7 +75,10 @@ class RegisterFragment : Fragment() {
                         }
 
                         override fun onError(anError: ANError?) {
-                            Log.d("Network Error", anError?.message)
+                            if (anError?.errorCode != 200) {
+                                Log.d("message", anError?.errorBody)
+                                Toasty.error(context!!, JSONObject(anError?.errorBody?.toString()).getString("message"), Toast.LENGTH_SHORT, true).show()
+                            }
                         }
                     })
         }

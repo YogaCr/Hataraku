@@ -1,13 +1,7 @@
 <resources>
     <string name="app_name">Hataraku</string>
     <string name="x_api_key">8JDWKFC6AWZ2019LULUSUNBCWAWQCK56</string>
-    <string name="login">Login</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="daftar">Daftar</string>
     <string name="nama">Nama Lengkap</string>
-    <string name="lupa_password">Lupa Password</string>
-    <string name="reset_password">Reset Password</string>
     <string name="title_project">Proyek</string>
     <string name="title_cari">Cari</string>
     <string name="title_profile">Profile</string>

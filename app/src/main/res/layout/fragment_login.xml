@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:id="@+id/layout"
     tools:context=".UI.Fragment.LoginFragment">
 
     <TextView
@@ -76,44 +77,65 @@
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_login"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/button_auth"
-        android:text="Login"
-        android:textAllCaps="false"
-        android:textColor="#FFF" />
+        android:layout_height="wrap_content">
 
-    <com.shobhitpuri.custombuttons.GoogleSignInButton
-        android:id="@+id/btn_login_google"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/google_sign_in"
-        app:isDarkTheme="false" />
-
-    <LinearLayout
-        android:id="@+id/btn_toRegister"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:clickable="true"
-        android:orientation="horizontal">
-
-        <TextView
+        <ProgressBar
+            android:id="@+id/pb_login"
+            style="@style/Base.Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Belum punya akun? " />
+            android:layout_gravity="center"
+            android:layout_margin="24dp"
+            android:visibility="visible" />
 
-        <TextView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:id="@+id/ly_login"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Daftar"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_auth"
+                android:text="Login"
+                android:textAllCaps="false"
+                android:textColor="#FFF" />
 
+            <com.shobhitpuri.custombuttons.GoogleSignInButton
+                android:id="@+id/btn_login_google"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/google_sign_in"
+                app:isDarkTheme="false" />
+
+            <LinearLayout
+                android:id="@+id/btn_toRegister"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:clickable="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Belum punya akun? " />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Daftar"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
 </LinearLayout>
