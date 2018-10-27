@@ -1,11 +1,14 @@
 package com.hataraku.hataraku.UI.Fragment
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.hataraku.hataraku.R
 import kotlinx.android.synthetic.main.fragment_lowongan.*
 import java.text.SimpleDateFormat
@@ -21,7 +24,13 @@ class LowonganFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Buat Lowongan"
-        et_kategori.setText(arguments?.getString("kategori"))
+
+        @Suppress("UNCHECKED_CAST")
+        var spinAdapter:ArrayAdapter<Any> = spin_kategoriLowongan.adapter as ArrayAdapter<Any>
+        var pos:Int = spinAdapter.getPosition(arguments!!
+                .getString("kategori", "Pilih Kategori"))
+        spin_kategoriLowongan.setSelection(pos)
+
         et_tglBatas.setText(SimpleDateFormat("dd/MM/yyyy").format(System.currentTimeMillis()))
 
         val c = Calendar.getInstance()

@@ -62,7 +62,7 @@
                 <Spinner
                     android:padding="20dp"
                     android:id="@+id/spin_portofolio"
-                    android:entries="@array/kategori"
+                    android:entries="@array/portfolio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView

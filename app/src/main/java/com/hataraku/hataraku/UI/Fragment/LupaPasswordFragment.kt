@@ -34,6 +34,7 @@ class LupaPasswordFragment : Fragment() {
                 et_email_lupa.error = "Tolong masukkan email dengan benar"
                 return@setOnClickListener
             }
+            btn_lupa_password.isEnabled = false
             AndroidNetworking.post(ApiEndPoint.AUTH_FORGOTPASS.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
@@ -50,6 +51,7 @@ class LupaPasswordFragment : Fragment() {
                                 Log.d("message", anError?.errorBody)
                                 Toasty.error(context!!, JSONObject(anError?.errorBody?.toString()).getString("message"), Toast.LENGTH_SHORT, true).show()
                             }
+                            btn_lupa_password.isEnabled = true
                         }
                     })
         }

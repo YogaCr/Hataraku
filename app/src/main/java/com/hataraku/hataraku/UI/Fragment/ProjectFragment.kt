@@ -57,24 +57,24 @@ class ProjectFragment : Fragment() {
     private fun initProyek() {
         var bundle = Bundle()
         proyek_bangun.setOnClickListener {
-            bundle.putString("kategori", "Bangun")
-            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+            bundle.putString("kategori", "Pembangunan")
+            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_renov.setOnClickListener {
-            bundle.putString("kategori", "Renovasi")
-            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+            bundle.putString("kategori", "Renovasi/Perbaikan")
+            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_cat.setOnClickListener {
-            bundle.putString("kategori", "Cat")
-            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+            bundle.putString("kategori", "Cat/Wallpaper")
+            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_ledeng.setOnClickListener {
-            bundle.putString("kategori", "Ledeng")
-            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+            bundle.putString("kategori", "Listrik")
+            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_listrik.setOnClickListener {
-            bundle.putString("kategori", "Listrik")
-            findNavController(it).navigate(R.id.lowonganFragment, bundle)
+            bundle.putString("kategori", "Ledeng")
+            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
         }
     }
 }

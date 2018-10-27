@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/extend_navigation"
+    app:startDestination="@id/lowonganFragment">
+
+    <fragment
+        android:id="@+id/lowonganFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.LowonganFragment"
+        android:label="fragment_lowongan"
+        tools:layout="@layout/fragment_lowongan" />
+</navigation>

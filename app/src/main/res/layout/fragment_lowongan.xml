@@ -28,18 +28,13 @@
                     android:text="Info Lowongan"
                     android:textStyle="bold" />
 
-                <android.support.design.widget.TextInputLayout
+                <Spinner
+                    android:id="@+id/spin_kategoriLowongan"
+                    android:padding="20dp"
+                    android:entries="@array/kategori"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <EditText
-                        android:id="@+id/et_kategori"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:editable="false"
-                        android:focusable="false"
-                        android:hint="Kategori" />
-                </android.support.design.widget.TextInputLayout>
+                    android:layout_height="wrap_content"
+                    android:clickable="false"/>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -174,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_auth"
-            android:text="Post Lowongan"
+            android:text="Review Lowongan"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold" />

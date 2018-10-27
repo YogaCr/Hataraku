@@ -6,10 +6,14 @@
         <item>Perempuan</item>
     </string-array>
     <string-array name="kategori">
+        <item>Pilih Kategori</item>
         <item>Pembangunan</item>
         <item>Renovasi/Perbaikan</item>
         <item>Cat/Wallpaper</item>
         <item>Listrik</item>
         <item>Ledeng</item>
+    </string-array>
+    <string-array name="portfolio">
+        <item>Pilih Portofolio</item>
     </string-array>
 </resources>

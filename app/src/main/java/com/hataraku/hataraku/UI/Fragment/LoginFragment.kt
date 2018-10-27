@@ -76,6 +76,9 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            ly_login.visibility = View.INVISIBLE
+            pb_login.visibility = View.VISIBLE
+
             AndroidNetworking.post(ApiEndPoint.AUTH_LOGIN.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
@@ -101,6 +104,8 @@ class LoginFragment : Fragment() {
                                 Log.d("message", anError?.errorBody)
                                 Toasty.error(context!!, JSONObject(anError?.errorBody?.toString()).getString("message"), Toast.LENGTH_SHORT, true).show()
                             }
+                            ly_login.visibility = View.VISIBLE
+                            pb_login.visibility = View.INVISIBLE
                         }
                     })
         }

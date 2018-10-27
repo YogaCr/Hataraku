@@ -53,6 +53,9 @@ class RegisterFragment : Fragment() {
                 et_passconfirm_register.error = "Pastikan password sudah benar"
                 return@setOnClickListener
             }
+            ly_register.visibility = View.INVISIBLE
+            pb_register.visibility = View.VISIBLE
+
 //            Log.d("url", ApiEndPoint.AUTH_REGISTER.value)
             AndroidNetworking.post(ApiEndPoint.AUTH_REGISTER.value)
                     .addHeaders("Content-Type", "application/json")
@@ -79,6 +82,8 @@ class RegisterFragment : Fragment() {
                                 Log.d("message", anError?.errorBody)
                                 Toasty.error(context!!, JSONObject(anError?.errorBody?.toString()).getString("message"), Toast.LENGTH_SHORT, true).show()
                             }
+                            ly_register.visibility = View.VISIBLE
+                            pb_register.visibility = View.INVISIBLE
                         }
                     })
         }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -37,6 +38,9 @@ class ResetPasswordFragment : Fragment() {
                 et_new_pass_confirm_reset.error = "Password tidak cocok"
                 return@setOnClickListener
             }
+
+            btn_reset_password.isEnabled = false
+
             AndroidNetworking.post(ApiEndPoint.AUTH_RESETPASS.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
@@ -47,14 +51,13 @@ class ResetPasswordFragment : Fragment() {
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            Navigation.findNavController(it).navigateUp()
                         }
 
                         override fun onError(anError: ANError?) {
                             if (anError?.errorCode != 200)
                                 Toasty.error(context!!, JSONObject(anError?.errorBody?.toString()).getString("message"), Toast.LENGTH_SHORT, true).show()
+                            btn_reset_password.isEnabled = true
                         }
                     })
         }

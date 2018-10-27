@@ -9,7 +9,11 @@
         android:id="@+id/projectFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.ProjectFragment"
         android:label="fragment_project"
-        tools:layout="@layout/fragment_project" ><action android:id="@+id/action_projectFragment_to_lowonganFragment" app:destination="@id/lowonganFragment" app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/></fragment>
+        tools:layout="@layout/fragment_project" >
+        <action
+            android:id="@+id/action_projectFragment_to_extendActivity"
+            app:destination="@id/extendActivity" />
+    </fragment>
     <fragment
         android:id="@+id/cariFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.CariFragment"
@@ -20,9 +24,9 @@
         android:name="com.hataraku.hataraku.UI.Fragment.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <fragment
-        android:id="@+id/lowonganFragment"
-        android:name="com.hataraku.hataraku.UI.Fragment.LowonganFragment"
-        android:label="fragment_lowongan"
-        tools:layout="@layout/fragment_lowongan" />
+    <activity
+        android:id="@+id/extendActivity"
+        android:name="com.hataraku.hataraku.UI.Activity.ExtendActivity"
+        android:label="activity_extend"
+        tools:layout="@layout/activity_extend" />
 </navigation>

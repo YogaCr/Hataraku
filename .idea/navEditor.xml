@@ -60,8 +60,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="285" />
-                            <option name="y" value="-115" />
+                            <option name="x" value="299" />
+                            <option name="y" value="-94" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -93,6 +93,21 @@
             </LayoutPositions>
           </value>
         </entry>
+        <entry key="extend_navigation.xml">
+          <value>
+            <LayoutPositions>
+              <option name="myPositions">
+                <map>
+                  <entry key="lowonganFragment">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </LayoutPositions>
+          </value>
+        </entry>
         <entry key="main_navigation.xml">
           <value>
             <LayoutPositions>
@@ -103,20 +118,20 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-302" />
-                            <option name="y" value="92" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="lowonganFragment">
+                  <entry key="extendActivity">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-54" />
-                            <option name="y" value="-550" />
+                            <option name="x" value="265" />
+                            <option name="y" value="280" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -127,8 +142,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-301" />
-                            <option name="y" value="378" />
+                            <option name="x" value="177" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -139,13 +154,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-300" />
-                            <option name="y" value="-335" />
+                            <option name="x" value="12" />
+                            <option name="y" value="280" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_projectFragment_to_lowonganFragment">
+                            <entry key="action_projectFragment_to_extendActivity">
                               <value>
                                 <LayoutPositions />
                               </value>
