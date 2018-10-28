@@ -1,4 +1,4 @@
 package com.hataraku.hataraku.Model
 
-data class LowonganModel(val judul: String, val kategori: String,
-                         var tgl_akhir: String, var budget: Double, var oleh: String)
+data class LowonganModel(val id: Int, val judul: String, val kategori: String,
+                         var tgl_akhir: String, var budget: String, var oleh: String)

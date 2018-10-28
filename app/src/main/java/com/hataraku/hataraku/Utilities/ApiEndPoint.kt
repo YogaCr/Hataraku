@@ -11,29 +11,29 @@ enum class ApiEndPoint(val value: String) {
     AUTH_GOOGLE(BASE_URL.value + "auth/google"),
 
     //User
-    USER(BASE_URL.value + "user/"),
+    USER(BASE_URL.value + "user"),
 
     //Member
-    MEMBER(BASE_URL.value + "member/"),
+    MEMBER(BASE_URL.value + "member"),
 
     //Kategori
-    KATEGORI(BASE_URL.value + "kategori/"),
+    KATEGORI(BASE_URL.value + "kategori"),
 
     //Handyman
-    HANDYMAN(BASE_URL.value + "handyman/"),
+    HANDYMAN(BASE_URL.value + "handyman"),
 
     //Lowongan
-    LOWONGAN(BASE_URL.value + "lowongan/"),
+    LOWONGAN(BASE_URL.value + "lowongan"),
 
     //Tawaran
-    TAWARAN(BASE_URL.value + "tawaran/"),
+    TAWARAN(BASE_URL.value + "tawaran"),
 
     //Transaksi
-    TRANSAKSI(BASE_URL.value + "transaksi/"),
+    TRANSAKSI(BASE_URL.value + "transaksi"),
 
     //Portofolio
-    PORTOFOLIO(BASE_URL.value + "portofolio/"),
+    PORTOFOLIO(BASE_URL.value + "portofolio"),
 
     //Review
-    REVIEW(BASE_URL.value + "review/")
+    REVIEW(BASE_URL.value + "review")
 }

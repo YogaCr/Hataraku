@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,8 +8,32 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_lowongan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
 
-    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/ly_bukan_tukang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="40dp"
+        android:orientation="vertical"
+        android:visibility="invisible">
 
-</android.support.v4.widget.NestedScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anda tidak bisa melakukan pencarian karena anda bukan tukang"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/btn_daftar_tukang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_lupa"
+            android:padding="8dp"
+            android:text="Daftar Menjadi Tukang"
+            android:textColor="#fff" />
+    </LinearLayout>
+</FrameLayout>

@@ -1,5 +1,7 @@
 package com.hataraku.hataraku.UI.Fragment
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.TabLayout
@@ -11,6 +13,7 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation.findNavController
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Adapter.SlideAdapter
+import com.hataraku.hataraku.Utilities.Preferences
 import kotlinx.android.synthetic.main.fragment_project.*
 import java.util.*
 
@@ -18,6 +21,7 @@ class ProjectFragment : Fragment() {
 
     internal lateinit var viewPager: ViewPager
     internal lateinit var indicator: TabLayout
+    lateinit var pref: SharedPreferences
     var currentPage = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +33,12 @@ class ProjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Proyek"
+        pref = context!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
+        if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+            ly_daftar_tukang.visibility = View.INVISIBLE
+        } else {
+            ly_daftar_tukang.visibility = View.VISIBLE
+        }
         viewPager = view.findViewById(R.id.slider_pager) as ViewPager
         indicator = view.findViewById(R.id.indicator) as TabLayout
 

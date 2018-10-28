@@ -45,14 +45,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //Toast.makeText(context, Preferences.HatarakuPreferences.name, Toast.LENGTH_SHORT).show()
         pref = context!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
-
-        /*if (pref.getBoolean(Preferences.IS_LOGIN.name, false)) {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
-        }*/
 
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
         googleSignInClient = GoogleSignIn.getClient(context!!, gso)
@@ -95,9 +88,31 @@ class LoginFragment : Fragment() {
                             editor.putString(Preferences.NAMA.name, response.getJSONObject("user").getString("nama"))
                             editor.putBoolean(Preferences.IS_LOGIN.name, true)
                             editor.apply()
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+
+                            AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getJSONObject("user").getString("id"))
+                                    .addHeaders("Content-Type", "application/json")
+                                    .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                                    .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                    .setPriority(Priority.HIGH)
+                                    .build()
+                                    .getAsJSONObject(object : JSONObjectRequestListener {
+                                        override fun onResponse(response: JSONObject?) {
+                                            if (response?.getJSONArray("data")!!.length() > 0) {
+                                                editor.putBoolean(Preferences.IS_TUKANG.name, true)
+                                            } else {
+                                                editor.putBoolean(Preferences.IS_TUKANG.name, false)
+                                            }
+                                            editor.apply()
+
+                                            val intent = Intent(context, MainActivity::class.java)
+                                            startActivity(intent)
+                                            activity?.finish()
+                                        }
+
+                                        override fun onError(anError: ANError?) {
+                                            Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
                         }
 
                         override fun onError(anError: ANError?) {
@@ -134,27 +149,56 @@ class LoginFragment : Fragment() {
                         .setPriority(Priority.HIGH)
                         .build()
                         .getAsJSONObject(object : JSONObjectRequestListener {
-                            override fun onResponse(response: JSONObject?) {
-
+                            override fun onResponse(response: JSONObject) {
                                 val edit = pref.edit()
                                 edit.putBoolean(Preferences.IS_LOGIN.name, true)
-                                edit.putString(Preferences.NAMA.name, account.displayName)
                                 edit.putString(Preferences.EMAIL.name, account.email)
-                                edit.putString(Preferences.API_KEY.name, response?.getString("api_token"))
+                                edit.putString(Preferences.API_KEY.name, response.getString("api_token"))
+                                edit.putString(Preferences.NAMA.name, response.getJSONObject("user").getString("nama"))
+                                edit.putBoolean(Preferences.IS_LOGIN.name, true)
                                 edit.apply()
-                                googleSignInClient.signOut()
 
-                                val intent = Intent(context, MainActivity::class.java)
-                                startActivity(intent)
-                                activity?.finish()
+                                AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getJSONObject("user").getString("id"))
+                                        .addHeaders("Content-Type", "application/json")
+                                        .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                                        .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                        .setPriority(Priority.HIGH)
+                                        .build()
+                                        .getAsJSONObject(object : JSONObjectRequestListener {
+                                            override fun onResponse(response: JSONObject?) {
+                                                if (response?.getJSONArray("data")!!.length() > 0) {
+                                                    edit.putBoolean(Preferences.IS_TUKANG.name, true)
+                                                } else {
+                                                    edit.putBoolean(Preferences.IS_TUKANG.name, false)
+                                                }
+                                                edit.apply()
+                                                googleSignInClient.signOut()
+
+                                                val intent = Intent(context, MainActivity::class.java)
+                                                startActivity(intent)
+                                                activity?.finish()
+                                            }
+
+                                            override fun onError(anError: ANError?) {
+                                                Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                                            }
+                                        })
+
                             }
 
                             override fun onError(anError: ANError?) {
-
+                                if (anError?.errorCode != 200) {
+                                    Log.d("message", anError?.errorBody)
+                                    Toasty.error(context!!, JSONObject(anError?.errorBody?.toString()).getString("message"), Toast.LENGTH_SHORT, true).show()
+                                }
+                                ly_login.visibility = View.VISIBLE
+                                pb_login.visibility = View.INVISIBLE
                             }
                         })
 
 
+            } else {
+                Toasty.error(this.context!!, "Login gagal", Toast.LENGTH_SHORT, true).show()
             }
         }
     }

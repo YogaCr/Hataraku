@@ -40,11 +40,12 @@
                             android:textStyle="bold"
                             android:text="Nama:"/>
                         <TextView
+                            android:id="@+id/tv_nama"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Dummy Text"/>
+                            android:text="" />
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -75,11 +76,12 @@
                             android:textStyle="bold"
                             android:text="Judul:"/>
                         <TextView
+                            android:id="@+id/tv_judul"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Dummy Text"/>
+                            android:text="" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -93,11 +95,12 @@
                             android:textStyle="bold"
                             android:text="Isi:"/>
                         <TextView
+                            android:id="@+id/tv_isi"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Dummy Text"/>
+                            android:text="" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -111,11 +114,12 @@
                             android:textStyle="bold"
                             android:text="Alamat:"/>
                         <TextView
+                            android:id="@+id/tv_alamat"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Dummy Text"/>
+                            android:text="" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -129,11 +133,12 @@
                             android:textStyle="bold"
                             android:text="Skill:"/>
                         <TextView
+                            android:id="@+id/tv_skill"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Dummy Text"/>
+                            android:text="" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -147,11 +152,12 @@
                             android:textStyle="bold"
                             android:text="Budget:"/>
                         <TextView
+                            android:id="@+id/tv_budget"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Rp. 1.000.000"/>
+                            android:text="" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -165,30 +171,14 @@
                             android:textStyle="bold"
                             android:text="Batas Lowongan:"/>
                         <TextView
+                            android:id="@+id/tv_batas"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:padding="4dp"
-                            android:text="Dummy Text"/>
+                            android:text="" />
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="4dp"
-                            android:textStyle="bold"
-                            android:text="Alamat:"/>
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:padding="4dp"
-                            android:text="Dummy Text"/>
-                    </LinearLayout>
+
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>

@@ -34,7 +34,6 @@
             android:name=".UI.Activity.ExtendActivity"
             android:screenOrientation="portrait" />
         <activity android:name=".UI.Activity.ExtendTawaranActivity" />
-        <activity android:name=".UI.Fragment.TawaranActivity" />
         <activity android:name=".UI.Activity.ExtendProfileActivity"></activity>
     </application>
 

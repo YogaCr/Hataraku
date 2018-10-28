@@ -5,5 +5,6 @@ enum class Preferences {
     IS_LOGIN,
     EMAIL,
     NAMA,
-    API_KEY
+    API_KEY,
+    IS_TUKANG
 }

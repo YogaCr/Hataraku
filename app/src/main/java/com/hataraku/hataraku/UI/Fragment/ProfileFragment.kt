@@ -1,14 +1,15 @@
 package com.hataraku.hataraku.UI.Fragment
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
-import androidx.navigation.Navigation.findNavController
 import com.hataraku.hataraku.Model.TransaksiModel
 import com.hataraku.hataraku.R
+import com.hataraku.hataraku.UI.Activity.AuthActivity
 import com.hataraku.hataraku.UI.Adapter.TransaksiAdapter
 import com.hataraku.hataraku.Utilities.Preferences
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -43,7 +44,7 @@ class ProfileFragment : Fragment() {
         val trans: TransaksiModel = TransaksiModel(
                 "Pembangunan Rumah", "Bangunan", "22-09-2018",
                 1000000.0, "Yoga Aranggi",
-        1, 5.0)
+                1, 5.0)
         while (x > 0) {
             transaksi.add(trans)
             x--
@@ -52,14 +53,19 @@ class ProfileFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.profile_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId){
+        when (item?.itemId) {
 //            R.id.menuEditProfile -> findNavController()
 //                    .navigate(R.id.action_loginFragment_to_registerFragment)
-            R.id.menuLogout ->
+            R.id.menuLogout -> {
+                pref.edit().clear().apply()
+                val i = Intent(this.context!!, AuthActivity::class.java)
+                context!!.startActivity(i)
                 activity?.finish()
+            }
         }
         return true
     }

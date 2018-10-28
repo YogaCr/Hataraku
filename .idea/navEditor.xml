@@ -250,12 +250,6 @@
                   <entry key="cariFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="384" />
-                            <option name="y" value="-228" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_cariFragment_to_extendTawaranActivity">
@@ -270,49 +264,22 @@
                   </entry>
                   <entry key="extendActivity">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="198" />
-                            <option name="y" value="-60" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="extendProfileActivity">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="197" />
-                            <option name="y" value="-350" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="extendTawaranActivity">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="594" />
-                            <option name="y" value="-318" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="profileFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-13" />
-                            <option name="y" value="-259" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_profileFragment_to_extendProfileActivity">
@@ -328,12 +295,6 @@
                   <entry key="projectFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-13" />
-                            <option name="y" value="29" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_projectFragment_to_extendActivity">
