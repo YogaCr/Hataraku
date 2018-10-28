@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Activity.ExtendActivity">
+    tools:context=".UI.Activity.ExtendProfileActivity">
     <fragment
-        android:id="@+id/nav_extend"
+        android:id="@+id/nav_profile"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/extend_navigation"
-        tools:layout="@layout/fragment_lowongan_detail" />
+        app:navGraph="@navigation/extend_profile_navigation"
+        tools:layout="@layout/fragment_biodata" />
 </android.support.constraint.ConstraintLayout>

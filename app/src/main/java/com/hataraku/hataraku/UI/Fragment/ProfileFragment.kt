@@ -5,9 +5,8 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.navigation.Navigation.findNavController
 import com.hataraku.hataraku.Model.TransaksiModel
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Adapter.TransaksiAdapter
@@ -17,6 +16,11 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 class ProfileFragment : Fragment() {
 
     val transaksi: ArrayList<TransaksiModel> = ArrayList()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     private lateinit var pref: SharedPreferences
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -38,12 +42,25 @@ class ProfileFragment : Fragment() {
         var x = 10
         val trans: TransaksiModel = TransaksiModel(
                 "Pembangunan Rumah", "Bangunan", "22-09-2018",
-                1000000.0, "Yoga Aranggi"
-        )
+                1000000.0, "Yoga Aranggi",
+        1, 5.0)
         while (x > 0) {
             transaksi.add(trans)
             x--
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+//            R.id.menuEditProfile -> findNavController()
+//                    .navigate(R.id.action_loginFragment_to_registerFragment)
+            R.id.menuLogout ->
+                activity?.finish()
+        }
+        return true
+    }
 }

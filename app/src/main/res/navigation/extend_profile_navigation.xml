@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/extend_profile_navigation"
+    app:startDestination="@id/biodataFragment">
+
+    <fragment
+        android:id="@+id/biodataFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.BiodataFragment"
+        android:label="fragment_biodata"
+        tools:layout="@layout/fragment_biodata" />
+    <fragment
+        android:id="@+id/transaksiHistoryFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.TransaksiHistoryFragment"
+        android:label="fragment_transaksi_history"
+        tools:layout="@layout/fragment_transaksi_history" />
+</navigation>

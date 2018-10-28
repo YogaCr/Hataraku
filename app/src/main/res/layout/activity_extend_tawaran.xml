@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Activity.ExtendActivity">
+    tools:context=".UI.Activity.ExtendTawaranActivity">
     <fragment
-        android:id="@+id/nav_extend"
+        android:id="@+id/nav_tawaran"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/extend_navigation"
+        app:navGraph="@navigation/extend_tawaran_navigation"
         tools:layout="@layout/fragment_lowongan_detail" />
 </android.support.constraint.ConstraintLayout>

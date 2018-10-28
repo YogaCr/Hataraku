@@ -18,15 +18,33 @@
         android:id="@+id/cariFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.CariFragment"
         android:label="fragment_cari"
-        tools:layout="@layout/fragment_cari" />
+        tools:layout="@layout/fragment_cari" >
+        <action
+            android:id="@+id/action_cariFragment_to_extendTawaranActivity"
+            app:destination="@id/extendTawaranActivity" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_extendProfileActivity"
+            app:destination="@id/extendProfileActivity" />
+    </fragment>
     <activity
         android:id="@+id/extendActivity"
         android:name="com.hataraku.hataraku.UI.Activity.ExtendActivity"
         android:label="activity_extend"
         tools:layout="@layout/activity_extend" />
+    <activity
+        android:id="@+id/extendTawaranActivity"
+        android:name="com.hataraku.hataraku.UI.Activity.ExtendTawaranActivity"
+        android:label="activity_extend_tawaran"
+        tools:layout="@layout/activity_extend_tawaran" />
+    <activity
+        android:id="@+id/extendProfileActivity"
+        android:name="com.hataraku.hataraku.UI.Activity.ExtendProfileActivity"
+        android:label="activity_extend_profile"
+        tools:layout="@layout/activity_extend_profile" />
 </navigation>

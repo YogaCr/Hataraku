@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/extend_tawaran_navigation"
+    app:startDestination="@id/lowonganDetailFragment">
+
+    <fragment
+        android:id="@+id/lowonganDetailFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.LowonganDetailFragment"
+        android:label="fragment_lowongan_detail"
+        tools:layout="@layout/fragment_lowongan_detail" >
+        <action
+            android:id="@+id/action_lowonganDetailFragment_to_tawaranNextFragment"
+            app:destination="@id/tawaranNextFragment" />
+        <action
+            android:id="@+id/action_lowonganDetailFragment_to_tawaranFragment"
+            app:destination="@id/tawaranFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tawaranNextFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.TawaranNextFragment"
+        android:label="fragment_tawaran_next"
+        tools:layout="@layout/fragment_tawaran_next" />
+    <fragment
+        android:id="@+id/tawaranFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.TawaranFragment"
+        android:label="fragment_tawaran"
+        tools:layout="@layout/fragment_tawaran" />
+</navigation>
