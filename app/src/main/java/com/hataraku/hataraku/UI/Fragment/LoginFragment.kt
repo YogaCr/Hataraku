@@ -136,21 +136,25 @@ class LoginFragment : Fragment() {
                         .getAsJSONObject(object : JSONObjectRequestListener {
                             override fun onResponse(response: JSONObject?) {
 
+                                val edit = pref.edit()
+                                edit.putBoolean(Preferences.IS_LOGIN.name, true)
+                                edit.putString(Preferences.NAMA.name, account.displayName)
+                                edit.putString(Preferences.EMAIL.name, account.email)
+                                edit.putString(Preferences.API_KEY.name, response?.getString("api_token"))
+                                edit.apply()
+                                googleSignInClient.signOut()
+
+                                val intent = Intent(context, MainActivity::class.java)
+                                startActivity(intent)
+                                activity?.finish()
                             }
 
                             override fun onError(anError: ANError?) {
 
                             }
                         })
-                googleSignInClient.signOut()
 
-                /*val edit = pref.edit()
-                edit.putBoolean(Preferences.IS_LOGIN.name, true)
-                edit.apply()*/
 
-                val intent = Intent(context, MainActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
             }
         }
     }
