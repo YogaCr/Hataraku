@@ -32,7 +32,7 @@ enum class ApiEndPoint(val value: String) {
     TRANSAKSI(BASE_URL.value + "transaksi"),
 
     //Portofolio
-    PORTOFOLIO(BASE_URL.value + "portofolio"),
+    PORTOFOLIO(BASE_URL.value + "portfolio"),
 
     //Review
     REVIEW(BASE_URL.value + "review")

@@ -1,73 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="125dp" android:maxHeight="125dp"
-    android:paddingLeft="8dp" android:paddingRight="8dp"
-    android:paddingTop="4dp" android:paddingBottom="4dp">
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:maxHeight="125dp"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingTop="4dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="4dp">
+
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
+
             <ImageView
+                android:id="@+id/iv_image"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_book"/>
+                android:src="@mipmap/ic_launcher" />
+
             <LinearLayout
-                android:orientation="vertical"
-                android:paddingLeft="8dp"
-                android:layout_gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="3">
+                android:layout_gravity="center"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:paddingLeft="8dp">
+
                 <TextView
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:id="@+id/txtProposal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:text="Proposal Tawaran"
-                    android:textSize="6pt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-                <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:text="Estimasi Selesai: 22/10/2018"
-                    android:id="@+id/txtTgl"
-                    android:textSize="6pt"
+                    android:textSize="6pt" />
+
+                <TextView
+                    android:id="@+id/txtTglSelesai"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:text="Estimasi Selesai: 22/10/2018"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textSize="6pt" />
+
+                <TextView
+                    android:id="@+id/txtOlehTawaran"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Oleh: Yoga Aranggi"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textSize="6pt" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:text="Oleh: Yoga Aranggi"
-                        android:id="@+id/txtOleh"
-                        android:textSize="6pt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_star"/>
+                        android:src="@drawable/ic_star" />
+
                     <TextView
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:text="5"
                         android:id="@+id/txtRating"
-                        android:textSize="6pt"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textSize="6pt" />
                 </LinearLayout>
+
                 <TextView
-                    android:paddingTop="4dp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:text="Rp. 1.000.000"
-                    android:id="@+id/txtBudget"
-                    android:textStyle="bold"
+                    android:id="@+id/txtTarif"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:paddingTop="4dp"
+                    android:text="Rp. 1.000.000"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

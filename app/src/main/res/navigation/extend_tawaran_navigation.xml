@@ -9,7 +9,7 @@
         android:id="@+id/lowonganDetailFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.LowonganDetailFragment"
         android:label="fragment_lowongan_detail"
-        tools:layout="@layout/fragment_lowongan_detail" >
+        tools:layout="@layout/fragment_lowongan_detail">
         <action
             android:id="@+id/action_lowonganDetailFragment_to_tawaranNextFragment"
             app:destination="@id/tawaranNextFragment" />
@@ -26,5 +26,9 @@
         android:id="@+id/tawaranFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.TawaranFragment"
         android:label="fragment_tawaran"
-        tools:layout="@layout/fragment_tawaran" />
+        tools:layout="@layout/fragment_tawaran">
+        <action
+            android:id="@+id/action_tawaranFragment_to_lowonganDetailFragment"
+            app:popUpTo="@id/lowonganDetailFragment" />
+    </fragment>
 </navigation>

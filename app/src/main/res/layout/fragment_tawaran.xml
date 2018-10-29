@@ -70,9 +70,11 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:hint="Tarif" />
+                            android:hint="Tarif"
+                            android:inputType="number|numberDecimal" />
                     </LinearLayout>
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -97,29 +99,29 @@
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <!--<android.support.v7.widget.CardView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:padding="8dp">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:padding="8dp">-->
 
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:orientation="vertical"-->
-                <!--android:padding="8dp">-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:orientation="vertical"-->
+        <!--android:padding="8dp">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="8dp"-->
-                    <!--android:text="File (opsional)"-->
-                    <!--android:textStyle="bold" />-->
+        <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:text="File (opsional)"-->
+        <!--android:textStyle="bold" />-->
 
-                <!--<EditText-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:hint="File" />-->
-            <!--</LinearLayout>-->
+        <!--<EditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="File" />-->
+        <!--</LinearLayout>-->
         <!--</android.support.v7.widget.CardView>-->
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
@@ -142,20 +144,21 @@
 
                 <Spinner
                     android:id="@+id/spin_portofolio"
-                    android:padding="20dp"
-                    android:entries="@array/portfolio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"/>
+                    android:clickable="false"
+                    android:entries="@array/portfolio"
+                    android:padding="20dp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <Button
-            android:id="@+id/btn_portfolio"
+            android:id="@+id/btn_simpan_tawaran"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_auth"
-            android:text="Simpan Porfolio"
+            android:text="Simpan Tawaran"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
             android:textStyle="bold" />

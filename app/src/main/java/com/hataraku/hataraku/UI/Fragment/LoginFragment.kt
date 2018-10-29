@@ -87,6 +87,7 @@ class LoginFragment : Fragment() {
                             editor.putString(Preferences.API_KEY.name, response.getString("api_token"))
                             editor.putString(Preferences.NAMA.name, response.getJSONObject("user").getString("nama"))
                             editor.putBoolean(Preferences.IS_LOGIN.name, true)
+                            editor.putInt(Preferences.ID_USER.name, response.getJSONObject("user").getInt("id"))
                             editor.apply()
 
                             AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getJSONObject("user").getString("id"))
@@ -156,6 +157,7 @@ class LoginFragment : Fragment() {
                                 edit.putString(Preferences.API_KEY.name, response.getString("api_token"))
                                 edit.putString(Preferences.NAMA.name, response.getJSONObject("user").getString("nama"))
                                 edit.putBoolean(Preferences.IS_LOGIN.name, true)
+                                edit.putInt(Preferences.ID_USER.name, response.getJSONObject("user").getInt("id"))
                                 edit.apply()
 
                                 AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getJSONObject("user").getString("id"))
