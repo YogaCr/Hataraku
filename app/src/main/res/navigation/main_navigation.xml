@@ -41,7 +41,12 @@
         android:id="@+id/extendTawaranActivity"
         android:name="com.hataraku.hataraku.UI.Activity.ExtendTawaranActivity"
         android:label="activity_extend_tawaran"
-        tools:layout="@layout/activity_extend_tawaran" />
+        tools:layout="@layout/activity_extend_tawaran" >
+        <argument
+            android:name="page"
+            android:defaultValue="tawaran"
+            app:argType="string" />
+    </activity>
     <activity
         android:id="@+id/extendProfileActivity"
         android:name="com.hataraku.hataraku.UI.Activity.ExtendProfileActivity"
