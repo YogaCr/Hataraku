@@ -2,10 +2,8 @@ package com.hataraku.hataraku.UI.Activity
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import androidx.navigation.Navigation.findNavController
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.Utilities.Preferences
 
@@ -21,13 +19,6 @@ class AuthActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        val navController = findNavController(this, R.id.nav_host)
-        navController.addOnNavigatedListener { _, destination ->
-            val dest: String = try {
-                resources.getResourceName(destination.id)
-            } catch (e: Resources.NotFoundException) {
-                Integer.toString(destination.id)
-            }
-        }
+
     }
 }

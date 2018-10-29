@@ -73,7 +73,7 @@ class CariFragment : Fragment() {
                         var x = 0
                         while (x < arr!!.length()) {
                             val obj = arr.getJSONObject(x)
-                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), "Pembangunan", obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"))
+                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"))
                             lowongan.add(l)
                             x = x.inc()
                         }
@@ -122,7 +122,7 @@ class CariFragment : Fragment() {
                                         var x = 0
                                         while (x < arr!!.length()) {
                                             val obj = arr.getJSONObject(x)
-                                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), "Pembangunan", obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"))
+                                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"))
                                             lowongan.add(l)
                                             x = x.inc()
                                         }

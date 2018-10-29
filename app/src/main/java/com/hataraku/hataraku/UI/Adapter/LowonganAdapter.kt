@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import com.hataraku.hataraku.Model.LowonganModel
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.ExtendTawaranActivity
-import kotlinx.android.synthetic.main.fragment_profile.view.*
 import kotlinx.android.synthetic.main.lowongan_layout.view.*
 
 class LowonganAdapter(val items: ArrayList<LowonganModel>, val context: Context?) :
@@ -32,6 +31,14 @@ class LowonganAdapter(val items: ArrayList<LowonganModel>, val context: Context?
         holder.tv_tgl.text = "Batas :  " + lowongan.tgl_akhir
         holder.tv_oleh.text = "Oleh : " + lowongan.oleh
         holder.tv_budget.text = "Rp. " + lowongan.budget
+
+        when (lowongan.kategori.toLowerCase()) {
+            "pembangunan" -> holder.iv_lowongan.setImageResource(R.drawable.bata)
+            "renovasi/perbaikan" -> holder.iv_lowongan.setImageResource(R.drawable.palu)
+            "cat/wallpaper" -> holder.iv_lowongan.setImageResource(R.drawable.kuas)
+            "listrik" -> holder.iv_lowongan.setImageResource(R.drawable.listrik)
+            "ledeng" -> holder.iv_lowongan.setImageResource(R.drawable.air)
+        }
         holder.ly_lowongan.setOnClickListener {
             val intent = Intent(context!!, ExtendTawaranActivity::class.java)
             intent.putExtra("id", lowongan.id)
@@ -46,7 +53,7 @@ class LowonganAdapter(val items: ArrayList<LowonganModel>, val context: Context?
         val tv_tgl = view.txtTgl
         val tv_budget = view.txtBudget
         val tv_oleh = view.txtOleh
-        val iv_profile = view.iv_profile
         val ly_lowongan = view.ly_lowongan
+        val iv_lowongan = view.iv_lowongan
     }
 }
