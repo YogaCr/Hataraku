@@ -42,9 +42,14 @@ class LowonganDetailFragment : Fragment() {
     @SuppressLint("RestrictedApi")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rv_tawaran.adapter = TawaranAdapter(tawaran, context!!)
+
+        pref = activity!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
         rv_tawaran.layoutManager = LinearLayoutManager(context!!)
-        activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.visibility = View.VISIBLE
+        if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+            activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.visibility = View.VISIBLE
+        } else {
+            activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.visibility = View.INVISIBLE
+        }
         activity?.title = "Detail Lowongan"
         dialog = SpotsDialog.Builder()
                 .setContext(context!!)
@@ -54,9 +59,6 @@ class LowonganDetailFragment : Fragment() {
                 .apply {
                     show()
                 }
-
-        pref = activity!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
-
         AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "/" + activity?.intent?.getIntExtra("id", 1))
                 .addHeaders("Content-Type", "application/json")
                 .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
@@ -67,10 +69,16 @@ class LowonganDetailFragment : Fragment() {
                         tv_nama.text = response?.getString("nama")
                         tv_alamat.text = response?.getString("alamat")
                         tv_batas.text = response?.getString("tgl_akhir")
-                        tv_budget.text = "Rp. " + response?.getString("budget")
-                        tv_isi.text = response?.getString("isi")
-                        tv_judul.text = response?.getString("judul")
-                        tv_skill.text = response?.getString("skill")
+                        tv_budget.text = "Rp. " + BigDecimal.valueOf(response!!.getDouble("budget")).toPlainString()
+                        tv_isi.text = response.getString("isi")
+                        tv_judul.text = response.getString("judul")
+                        tv_skill.text = response.getString("skill")
+                        if (response.getInt("id_user") == pref.getInt(Preferences.ID_USER.name, 0)) {
+                            rv_tawaran.adapter = TawaranAdapter(tawaran, context!!, true)
+                            activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.visibility = View.INVISIBLE
+                        } else {
+                            rv_tawaran.adapter = TawaranAdapter(tawaran, context!!, false)
+                        }
                         activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.setOnClickListener {
                             dialog.show()
                             AndroidNetworking.get(ApiEndPoint.TAWARAN.value + "?id_user=" + pref.getInt(Preferences.ID_USER.name, 0))
@@ -110,6 +118,7 @@ class LowonganDetailFragment : Fragment() {
                     }
 
                 })
+
     }
 
     fun initTawaran() {

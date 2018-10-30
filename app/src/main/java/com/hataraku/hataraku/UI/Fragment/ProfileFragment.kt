@@ -7,12 +7,19 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.*
+import android.widget.Toast
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.hataraku.hataraku.Model.TransaksiModel
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.AuthActivity
 import com.hataraku.hataraku.UI.Adapter.TransaksiAdapter
+import com.hataraku.hataraku.Utilities.ApiEndPoint
 import com.hataraku.hataraku.Utilities.Preferences
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_profile.*
+import org.json.JSONObject
 
 class ProfileFragment : Fragment() {
 
@@ -34,6 +41,12 @@ class ProfileFragment : Fragment() {
         pref = context!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
         activity?.title = "Profil"
         tv_nama.text = pref.getString(Preferences.NAMA.name, "")
+        if (!pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+            ly_data_tukang.visibility = View.GONE
+        } else {
+            getMember()
+        }
+        tv_email.text = pref.getString(Preferences.EMAIL.name, "")
         addTransaksi()
         rv_transaksi.layoutManager = LinearLayoutManager(context)
         rv_transaksi.adapter = TransaksiAdapter(transaksi, context)
@@ -68,5 +81,24 @@ class ProfileFragment : Fragment() {
             }
         }
         return true
+    }
+
+    fun getMember() {
+        AndroidNetworking.get(ApiEndPoint.MEMBER.value + "/" + pref.getInt(Preferences.ID_USER.name, 0))
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                .build()
+                .getAsJSONObject(object : JSONObjectRequestListener {
+                    override fun onResponse(response: JSONObject) {
+                        tv_jml_transaksi.text = response.getInt("jml_transaksi").toString()
+                        tv_rating.text = response.getString("rating")
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        Toasty.error(context!!, JSONObject(anError!!.errorBody).getString("message"), Toast.LENGTH_SHORT).show()
+                    }
+
+                })
     }
 }

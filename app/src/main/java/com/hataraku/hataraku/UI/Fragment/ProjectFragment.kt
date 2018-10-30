@@ -7,14 +7,24 @@ import android.os.Handler
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.Navigation.findNavController
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.hataraku.hataraku.Model.LowonganModel
 import com.hataraku.hataraku.R
+import com.hataraku.hataraku.UI.Adapter.LowonganAdapter
 import com.hataraku.hataraku.UI.Adapter.SlideAdapter
+import com.hataraku.hataraku.Utilities.ApiEndPoint
 import com.hataraku.hataraku.Utilities.Preferences
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_project.*
+import org.json.JSONObject
 import java.util.*
 
 class ProjectFragment : Fragment() {
@@ -23,7 +33,8 @@ class ProjectFragment : Fragment() {
     internal lateinit var indicator: TabLayout
     lateinit var pref: SharedPreferences
     var currentPage = 0
-
+    val lowonganList: MutableList<LowonganModel> = mutableListOf()
+    val proyekList: MutableList<LowonganModel> = mutableListOf()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -35,10 +46,18 @@ class ProjectFragment : Fragment() {
         activity?.title = "Proyek"
         pref = context!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
         if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
-            ly_daftar_tukang.visibility = View.INVISIBLE
+            ly_daftar_tukang.visibility = View.GONE
+            cv_proyek.visibility = View.VISIBLE
+            rv_proyek_saya.layoutManager = LinearLayoutManager(context!!)
+            rv_proyek_saya.adapter = LowonganAdapter(proyekList, context!!)
+            initProyekSaya()
         } else {
             ly_daftar_tukang.visibility = View.VISIBLE
+            cv_proyek.visibility = View.GONE
         }
+        rv_lowongan_saya.layoutManager = LinearLayoutManager(context!!)
+        rv_lowongan_saya.adapter = LowonganAdapter(lowonganList, context!!)
+        initLowonganSaya()
         viewPager = view.findViewById(R.id.slider_pager) as ViewPager
         indicator = view.findViewById(R.id.indicator) as TabLayout
 
@@ -86,5 +105,88 @@ class ProjectFragment : Fragment() {
             bundle.putString("kategori", "Ledeng")
             findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
         }
+    }
+
+    fun initProyekSaya() {
+        proyekList.clear()
+        AndroidNetworking.get(ApiEndPoint.TAWARAN.value + "?id_user=" + pref.getInt(Preferences.ID_USER.name, 0) + "&status=3")
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                .build()
+                .getAsJSONObject(object : JSONObjectRequestListener {
+                    override fun onResponse(response: JSONObject?) {
+                        val arr = response?.getJSONArray("data")
+                        var x = 0
+                        while (x < arr!!.length()) {
+                            val obj = arr.getJSONObject(x)
+                            getLowongan(obj.getInt("id_lowongan"))
+                            x = x.inc()
+                        }
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                    }
+                })
+    }
+
+    fun initLowonganSaya() {
+        lowonganList.clear()
+        AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "?id_user=" + pref.getInt(Preferences.ID_USER.name, 0))
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                .build()
+                .getAsJSONObject(object : JSONObjectRequestListener {
+                    override fun onResponse(response: JSONObject?) {
+                        val arr = response?.getJSONArray("data")
+                        var x = 0
+                        while (x < arr!!.length()) {
+                            val obj = arr.getJSONObject(x)
+                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"), obj.getInt("status"))
+                            lowonganList.add(l)
+                            x = x.inc()
+                        }
+                        if (lowonganList.size > 0) {
+                            rv_lowongan_saya.visibility = View.VISIBLE
+                            tv_lowongan_none.visibility = View.INVISIBLE
+                        } else {
+                            rv_lowongan_saya.visibility = View.INVISIBLE
+                            tv_lowongan_none.visibility = View.VISIBLE
+                        }
+                        rv_lowongan_saya.adapter!!.notifyDataSetChanged()
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                    }
+                })
+    }
+
+    fun getLowongan(id_lowongan: Int) {
+        AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "/" + id_lowongan)
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                .build()
+                .getAsJSONObject(object : JSONObjectRequestListener {
+                    override fun onResponse(obj: JSONObject) {
+                        val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"), obj.getInt("status"))
+                        proyekList.add(l)
+                        if (proyekList.size > 0) {
+                            rv_proyek_saya.visibility = View.VISIBLE
+                            tv_proyek_none.visibility = View.INVISIBLE
+                        } else {
+                            rv_proyek_saya.visibility = View.INVISIBLE
+                            tv_proyek_none.visibility = View.VISIBLE
+                        }
+                        rv_proyek_saya.adapter!!.notifyDataSetChanged()
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                    }
+                })
     }
 }

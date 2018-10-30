@@ -36,4 +36,13 @@
             android:text="Daftar Menjadi Tukang"
             android:textColor="#fff" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Tidak ada data"
+        android:textSize="16sp"
+        android:visibility="invisible" />
 </FrameLayout>

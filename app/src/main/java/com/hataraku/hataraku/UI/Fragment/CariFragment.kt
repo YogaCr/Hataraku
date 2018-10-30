@@ -28,7 +28,7 @@ class CariFragment : Fragment() {
     lateinit var queryTextListener: SearchView.OnQueryTextListener
     lateinit var searchItem: MenuItem
     lateinit var searchManager: SearchManager
-    val lowongan: ArrayList<LowonganModel> = ArrayList()
+    val lowongan: MutableList<LowonganModel> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -73,9 +73,18 @@ class CariFragment : Fragment() {
                         var x = 0
                         while (x < arr!!.length()) {
                             val obj = arr.getJSONObject(x)
-                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"))
+                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"), obj.getInt("status"))
                             lowongan.add(l)
                             x = x.inc()
+                        }
+                        if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+                            if (lowongan.size > 0) {
+                                rv_lowongan.visibility = View.VISIBLE
+                                tv_not_found.visibility = View.INVISIBLE
+                            } else {
+                                rv_lowongan.visibility = View.INVISIBLE
+                                tv_not_found.visibility = View.VISIBLE
+                            }
                         }
                         rv_lowongan.adapter?.notifyDataSetChanged()
                     }
@@ -122,9 +131,18 @@ class CariFragment : Fragment() {
                                         var x = 0
                                         while (x < arr!!.length()) {
                                             val obj = arr.getJSONObject(x)
-                                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"))
+                                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"), obj.getInt("status"))
                                             lowongan.add(l)
                                             x = x.inc()
+                                        }
+                                        if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+                                            if (lowongan.size > 0) {
+                                                rv_lowongan.visibility = View.VISIBLE
+                                                tv_not_found.visibility = View.INVISIBLE
+                                            } else {
+                                                rv_lowongan.visibility = View.INVISIBLE
+                                                tv_not_found.visibility = View.VISIBLE
+                                            }
                                         }
                                         rv_lowongan.adapter?.notifyDataSetChanged()
                                     }

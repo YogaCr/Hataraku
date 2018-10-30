@@ -21,7 +21,9 @@
         android:id="@+id/tawaranNextFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.TawaranNextFragment"
         android:label="fragment_tawaran_next"
-        tools:layout="@layout/fragment_tawaran_next" />
+        tools:layout="@layout/fragment_tawaran_next">
+
+    </fragment>
     <fragment
         android:id="@+id/tawaranFragment"
         android:name="com.hataraku.hataraku.UI.Fragment.TawaranFragment"

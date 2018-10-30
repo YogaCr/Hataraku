@@ -9,9 +9,10 @@ import android.view.ViewGroup
 import com.hataraku.hataraku.Model.LowonganModel
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.ExtendTawaranActivity
+import com.hataraku.hataraku.UI.Activity.TransaksiActivity
 import kotlinx.android.synthetic.main.lowongan_layout.view.*
 
-class LowonganAdapter(val items: ArrayList<LowonganModel>, val context: Context?) :
+class LowonganAdapter(val items: MutableList<LowonganModel>, val context: Context?) :
         RecyclerView.Adapter<LowonganAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -40,9 +41,16 @@ class LowonganAdapter(val items: ArrayList<LowonganModel>, val context: Context?
             "ledeng" -> holder.iv_lowongan.setImageResource(R.drawable.air)
         }
         holder.ly_lowongan.setOnClickListener {
-            val intent = Intent(context!!, ExtendTawaranActivity::class.java)
-            intent.putExtra("id", lowongan.id)
-            context.startActivity(intent)
+            if (lowongan.status == 3) {
+                val intent = Intent(context!!, TransaksiActivity::class.java)
+                intent.putExtra("id", lowongan.id)
+                context.startActivity(intent)
+            } else {
+                val intent = Intent(context!!, ExtendTawaranActivity::class.java)
+                intent.putExtra("id", lowongan.id)
+                context.startActivity(intent)
+            }
+
         }
     }
 
