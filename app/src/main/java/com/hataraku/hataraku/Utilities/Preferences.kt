@@ -7,5 +7,12 @@ enum class Preferences {
     EMAIL,
     NAMA,
     API_KEY,
+    NO_HP,
+    ABOUT,
+    ALAMAT,
+    KELAMIN,
+    TGL_LAHIR,
+    SUDAH_RATING,
+    LAST_TUKANG,
     IS_TUKANG
 }

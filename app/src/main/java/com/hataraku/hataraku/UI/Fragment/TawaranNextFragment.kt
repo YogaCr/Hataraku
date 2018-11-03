@@ -67,9 +67,10 @@ class TawaranNextFragment : Fragment() {
                                 .build()
                                 .getAsJSONObject(object : JSONObjectRequestListener {
                                     override fun onResponse(response: JSONObject) {
+                                        val total = BigDecimal.valueOf(response.getDouble("tarif")).toPlainString()
                                         tv_proposal.text = response.getString("proposal")
                                         tv_selesai.text = response.getString("tgl_selesai")
-                                        tv_tarif.text = "Rp. " + BigDecimal.valueOf(response.getDouble("tarif")).toPlainString()
+                                        tv_tarif.text = "Rp. " + total
                                         tv_tukang.text = response.getString("nama")
                                         tv_rating.text = response.getString("rating")
                                         id_tukang = response.getInt("id_user")
@@ -89,12 +90,29 @@ class TawaranNextFragment : Fragment() {
                                                             .addJSONObjectBody(JSONObject().put("status", 3).put("id_tukang", id_tukang))
                                                             .build()
                                                             .getAsJSONObject(object : JSONObjectRequestListener {
-                                                                override fun onResponse(response: JSONObject?) {
-                                                                    Toasty.success(context!!, "Sukses", Toast.LENGTH_SHORT, true).show()
-                                                                    val intent = Intent(context!!, TransaksiActivity::class.java)
-                                                                    intent.putExtra("id", activity?.intent?.getIntExtra("id", 1))
-                                                                    startActivity(intent)
-                                                                    activity!!.finish()
+                                                                override fun onResponse(response: JSONObject) {
+                                                                    AndroidNetworking.post(ApiEndPoint.TRANSAKSI.value)
+                                                                            .addHeaders("Content-Type", "application/json")
+                                                                            .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
+                                                                            .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                                                            .addBodyParameter("id_tawaran", arguments!!.getString("id_tawaran"))
+                                                                            .addBodyParameter("total", total)
+                                                                            .addBodyParameter("catatan", "")
+                                                                            .build()
+                                                                            .getAsJSONObject(object : JSONObjectRequestListener {
+                                                                                override fun onResponse(response: JSONObject?) {
+                                                                                    Toasty.success(context!!, "Sukses", Toast.LENGTH_SHORT, true).show()
+                                                                                    val intent = Intent(context!!, TransaksiActivity::class.java)
+                                                                                    intent.putExtra("id", activity?.intent?.getIntExtra("id", 1))
+                                                                                    startActivity(intent)
+                                                                                    activity!!.finish()
+                                                                                }
+
+                                                                                override fun onError(anError: ANError?) {
+
+                                                                                }
+                                                                            })
+
                                                                 }
 
                                                                 override fun onError(anError: ANError?) {
@@ -123,5 +141,10 @@ class TawaranNextFragment : Fragment() {
                         Toasty.error(context!!, JSONObject(anError?.errorBody).getString("message"), Toast.LENGTH_SHORT).show()
                     }
                 })
+        /* btn_pesan.setOnClickListener {
+             val waIntent = Intent()
+             waIntent.action = Intent.ACTION_SEND
+
+         }*/
     }
 }

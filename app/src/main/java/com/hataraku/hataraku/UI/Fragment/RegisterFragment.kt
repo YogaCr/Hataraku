@@ -1,7 +1,5 @@
 package com.hataraku.hataraku.UI.Fragment
 
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -15,9 +13,7 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.hataraku.hataraku.R
-import com.hataraku.hataraku.UI.Activity.MainActivity
 import com.hataraku.hataraku.Utilities.ApiEndPoint
-import com.hataraku.hataraku.Utilities.Preferences
 import com.wajahatkarim3.easyvalidation.core.view_ktx.maxLength
 import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
 import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
@@ -67,15 +63,8 @@ class RegisterFragment : Fragment() {
                     .build()
                     .getAsJSONObject(object : JSONObjectRequestListener {
                         override fun onResponse(response: JSONObject?) {
-                            val pref = context!!.getSharedPreferences(Preferences.NAMA.name, Context.MODE_PRIVATE)
-                            val editor = pref.edit()
-                            editor.putString(Preferences.EMAIL.name, et_email_register.text.toString())
-                            editor.putString(Preferences.API_KEY.name, response?.getString("api_token"))
-                            editor.putString(Preferences.NAMA.name, response?.getJSONObject("user")?.getString("nama"))
-                            editor.apply()
-                            val intent = Intent(context, MainActivity::class.java)
-                            startActivity(intent)
-                            activity?.finish()
+                            Toasty.success(context!!, "Sukses mendaftar", Toast.LENGTH_SHORT, true).show()
+                            Navigation.findNavController(view).navigateUp()
                         }
 
                         override fun onError(anError: ANError?) {

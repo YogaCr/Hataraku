@@ -90,30 +90,50 @@ class LoginFragment : Fragment() {
                             editor.putInt(Preferences.ID_USER.name, response.getJSONObject("user").getInt("id"))
                             editor.apply()
 
-                            AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getJSONObject("user").getString("id"))
+                            AndroidNetworking.get(ApiEndPoint.MEMBER.value + "/" + response.getJSONObject("user").getString("id"))
                                     .addHeaders("Content-Type", "application/json")
                                     .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                                     .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
-                                    .setPriority(Priority.HIGH)
                                     .build()
                                     .getAsJSONObject(object : JSONObjectRequestListener {
-                                        override fun onResponse(response: JSONObject?) {
-                                            if (response?.getJSONArray("data")!!.length() > 0) {
-                                                editor.putBoolean(Preferences.IS_TUKANG.name, true)
-                                            } else {
-                                                editor.putBoolean(Preferences.IS_TUKANG.name, false)
-                                            }
+                                        override fun onResponse(response: JSONObject) {
+                                            editor.putString(Preferences.NO_HP.name, response.getString("no_hp"))
+                                            editor.putString(Preferences.ALAMAT.name, response.getString("alamat"))
+                                            editor.putString(Preferences.KELAMIN.name, response.getString("jenis_kelamin"))
+                                            editor.putString(Preferences.ABOUT.name, response.getString("about"))
+                                            editor.putString(Preferences.TGL_LAHIR.name, response.getString("tgl_lahir"))
                                             editor.apply()
+                                            AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getInt("id"))
+                                                    .addHeaders("Content-Type", "application/json")
+                                                    .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                                                    .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                                    .setPriority(Priority.HIGH)
+                                                    .build()
+                                                    .getAsJSONObject(object : JSONObjectRequestListener {
+                                                        override fun onResponse(response: JSONObject?) {
+                                                            if (response?.getJSONArray("data")!!.length() > 0) {
+                                                                editor.putBoolean(Preferences.IS_TUKANG.name, true)
+                                                            } else {
+                                                                editor.putBoolean(Preferences.IS_TUKANG.name, false)
+                                                            }
+                                                            editor.apply()
 
-                                            val intent = Intent(context, MainActivity::class.java)
-                                            startActivity(intent)
-                                            activity?.finish()
+                                                            val intent = Intent(context, MainActivity::class.java)
+                                                            startActivity(intent)
+                                                            activity?.finish()
+                                                        }
+
+                                                        override fun onError(anError: ANError?) {
+                                                            Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                                                        }
+                                                    })
                                         }
 
                                         override fun onError(anError: ANError?) {
-                                            Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+
                                         }
                                     })
+
                         }
 
                         override fun onError(anError: ANError?) {
@@ -160,29 +180,47 @@ class LoginFragment : Fragment() {
                                 edit.putInt(Preferences.ID_USER.name, response.getJSONObject("user").getInt("id"))
                                 edit.apply()
 
-                                AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getJSONObject("user").getString("id"))
+                                AndroidNetworking.get(ApiEndPoint.MEMBER.value + "/" + response.getJSONObject("user").getString("id"))
                                         .addHeaders("Content-Type", "application/json")
                                         .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                                         .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
-                                        .setPriority(Priority.HIGH)
                                         .build()
                                         .getAsJSONObject(object : JSONObjectRequestListener {
-                                            override fun onResponse(response: JSONObject?) {
-                                                if (response?.getJSONArray("data")!!.length() > 0) {
-                                                    edit.putBoolean(Preferences.IS_TUKANG.name, true)
-                                                } else {
-                                                    edit.putBoolean(Preferences.IS_TUKANG.name, false)
-                                                }
+                                            override fun onResponse(response: JSONObject) {
+                                                edit.putString(Preferences.NO_HP.name, response.getString("no_hp"))
+                                                edit.putString(Preferences.ALAMAT.name, response.getString("alamat"))
+                                                edit.putString(Preferences.KELAMIN.name, response.getString("jenis_kelamin"))
+                                                edit.putString(Preferences.ABOUT.name, response.getString("about"))
+                                                edit.putString(Preferences.TGL_LAHIR.name, response.getString("tgl_lahir"))
                                                 edit.apply()
-                                                googleSignInClient.signOut()
+                                                AndroidNetworking.get(ApiEndPoint.HANDYMAN.value + "/" + response.getInt("id"))
+                                                        .addHeaders("Content-Type", "application/json")
+                                                        .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                                                        .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                                        .setPriority(Priority.HIGH)
+                                                        .build()
+                                                        .getAsJSONObject(object : JSONObjectRequestListener {
+                                                            override fun onResponse(response: JSONObject?) {
+                                                                if (response?.getJSONArray("data")!!.length() > 0) {
+                                                                    edit.putBoolean(Preferences.IS_TUKANG.name, true)
+                                                                } else {
+                                                                    edit.putBoolean(Preferences.IS_TUKANG.name, false)
+                                                                }
+                                                                edit.apply()
+                                                                googleSignInClient.signOut()
+                                                                val intent = Intent(context, MainActivity::class.java)
+                                                                startActivity(intent)
+                                                                activity?.finish()
+                                                            }
 
-                                                val intent = Intent(context, MainActivity::class.java)
-                                                startActivity(intent)
-                                                activity?.finish()
+                                                            override fun onError(anError: ANError?) {
+                                                                Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                                                            }
+                                                        })
                                             }
 
                                             override fun onError(anError: ANError?) {
-                                                Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+
                                             }
                                         })
 

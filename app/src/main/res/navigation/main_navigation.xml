@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_projectFragment_to_extendActivity"
             app:destination="@id/extendActivity" />
+        <action
+            android:id="@+id/action_projectFragment_to_daftarTukangActivity"
+            app:destination="@id/daftarTukangActivity" />
     </fragment>
     <fragment
         android:id="@+id/cariFragment"
@@ -22,6 +25,9 @@
         <action
             android:id="@+id/action_cariFragment_to_extendTawaranActivity"
             app:destination="@id/extendTawaranActivity" />
+        <action
+            android:id="@+id/action_cariFragment_to_daftarTukangActivity"
+            app:destination="@id/daftarTukangActivity" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -52,4 +58,9 @@
         android:name="com.hataraku.hataraku.UI.Activity.ExtendProfileActivity"
         android:label="activity_extend_profile"
         tools:layout="@layout/activity_extend_profile" />
+    <activity
+        android:id="@+id/daftarTukangActivity"
+        android:name="com.hataraku.hataraku.UI.Fragment.DaftarTukangActivity"
+        android:label="activity_daftar_tukang"
+        tools:layout="@layout/activity_daftar_tukang" />
 </navigation>

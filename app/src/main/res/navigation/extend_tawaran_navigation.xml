@@ -32,5 +32,17 @@
         <action
             android:id="@+id/action_tawaranFragment_to_lowonganDetailFragment"
             app:popUpTo="@id/lowonganDetailFragment" />
+        <action
+            android:id="@+id/action_tawaranFragment_to_portfolioFragment"
+            app:destination="@id/portfolioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/portfolioFragment"
+        android:name="com.hataraku.hataraku.UI.Fragment.PortfolioFragment"
+        android:label="fragment_portfolio"
+        tools:layout="@layout/fragment_portfolio">
+        <action
+            android:id="@+id/action_portfolioFragment_to_tawaranFragment"
+            app:popUpTo="@id/tawaranFragment" />
     </fragment>
 </navigation>

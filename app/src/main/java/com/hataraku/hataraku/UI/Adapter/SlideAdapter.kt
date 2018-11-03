@@ -13,7 +13,7 @@ class SlideAdapter(private val context: Context?) : PagerAdapter() {
 
     private var inflater: LayoutInflater? = null
     private val images =
-            arrayOf(R.drawable.ic_book, R.drawable.ic_book, R.drawable.ic_book)
+            arrayOf(R.drawable.g869, R.drawable.g875, R.drawable.g927)
 
     override fun instantiateItem(view: ViewGroup, position: Int): Any {
         inflater = context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

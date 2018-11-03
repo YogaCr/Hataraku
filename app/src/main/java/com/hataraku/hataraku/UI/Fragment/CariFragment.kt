@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.SearchView
+import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.navigation.Navigation
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -29,7 +31,7 @@ class CariFragment : Fragment() {
     lateinit var searchItem: MenuItem
     lateinit var searchManager: SearchManager
     val lowongan: MutableList<LowonganModel> = mutableListOf()
-
+    var kerja = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -47,13 +49,18 @@ class CariFragment : Fragment() {
         if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
             ly_bukan_tukang.visibility = View.INVISIBLE
             rv_lowongan.visibility = View.VISIBLE
+            cekStatus()
+
         } else {
             ly_bukan_tukang.visibility = View.VISIBLE
             rv_lowongan.visibility = View.INVISIBLE
+
+        }
+        btn_daftar_tukang.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_projectFragment_to_daftarTukangActivity)
         }
         rv_lowongan.layoutManager = LinearLayoutManager(context)
         rv_lowongan.adapter = LowonganAdapter(lowongan, context)
-        addLowongan()
         activity?.title = "Cari Lowongan"
     }
 
@@ -61,7 +68,7 @@ class CariFragment : Fragment() {
         lowongan.clear()
         rv_lowongan.adapter?.notifyDataSetChanged()
         AndroidNetworking.cancelAll()
-        AndroidNetworking.get(ApiEndPoint.LOWONGAN.value)
+        AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "?status=1")
                 .addHeaders("Content-Type", "application/json")
                 .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
                 .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
@@ -113,44 +120,46 @@ class CariFragment : Fragment() {
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-                    if (newText.equals("")) {
-                        addLowongan()
-                    } else {
-                        lowongan.clear()
-                        rv_lowongan.adapter?.notifyDataSetChanged()
-                        AndroidNetworking.cancelAll()
-                        AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "?search=" + newText)
-                                .addHeaders("Content-Type", "application/json")
-                                .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
-                                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
-                                .setPriority(Priority.HIGH)
-                                .build()
-                                .getAsJSONObject(object : JSONObjectRequestListener {
-                                    override fun onResponse(response: JSONObject?) {
-                                        val arr = response?.getJSONArray("data")
-                                        var x = 0
-                                        while (x < arr!!.length()) {
-                                            val obj = arr.getJSONObject(x)
-                                            val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"), obj.getInt("status"))
-                                            lowongan.add(l)
-                                            x = x.inc()
-                                        }
-                                        if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
-                                            if (lowongan.size > 0) {
-                                                rv_lowongan.visibility = View.VISIBLE
-                                                tv_not_found.visibility = View.INVISIBLE
-                                            } else {
-                                                rv_lowongan.visibility = View.INVISIBLE
-                                                tv_not_found.visibility = View.VISIBLE
+                    if (!kerja) {
+                        if (newText.equals("")) {
+                            addLowongan()
+                        } else {
+                            lowongan.clear()
+                            rv_lowongan.adapter?.notifyDataSetChanged()
+                            AndroidNetworking.cancelAll()
+                            AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "?search=" + newText + "&status=1")
+                                    .addHeaders("Content-Type", "application/json")
+                                    .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                                    .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                    .setPriority(Priority.HIGH)
+                                    .build()
+                                    .getAsJSONObject(object : JSONObjectRequestListener {
+                                        override fun onResponse(response: JSONObject?) {
+                                            val arr = response?.getJSONArray("data")
+                                            var x = 0
+                                            while (x < arr!!.length()) {
+                                                val obj = arr.getJSONObject(x)
+                                                val l = LowonganModel(obj.getInt("id"), obj.getString("judul"), obj.getString("nama_kategori"), obj.getString("tgl_akhir"), obj.getString("budget"), obj.getString("nama"), obj.getInt("status"))
+                                                lowongan.add(l)
+                                                x = x.inc()
                                             }
+                                            if (pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+                                                if (lowongan.size > 0) {
+                                                    rv_lowongan.visibility = View.VISIBLE
+                                                    tv_not_found.visibility = View.INVISIBLE
+                                                } else {
+                                                    rv_lowongan.visibility = View.INVISIBLE
+                                                    tv_not_found.visibility = View.VISIBLE
+                                                }
+                                            }
+                                            rv_lowongan.adapter?.notifyDataSetChanged()
                                         }
-                                        rv_lowongan.adapter?.notifyDataSetChanged()
-                                    }
 
-                                    override fun onError(anError: ANError?) {
-                                        Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
-                                    }
-                                })
+                                        override fun onError(anError: ANError?) {
+                                            Toasty.error(context!!, anError!!.message!!, Toast.LENGTH_SHORT).show()
+                                        }
+                                    })
+                        }
                     }
                     return true
                 }
@@ -159,6 +168,34 @@ class CariFragment : Fragment() {
         }
 
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    fun cekStatus() {
+        AndroidNetworking.get(ApiEndPoint.TAWARAN.value + "?id_user=" + pref.getInt(Preferences.ID_USER.name, 0) + "&status=3")
+                .addHeaders("Content-Type", "application/json")
+                .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
+                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                .build()
+                .getAsJSONObject(object : JSONObjectRequestListener {
+                    override fun onResponse(response: JSONObject) {
+                        val arr = response.getJSONArray("data")
+                        if (arr.length() > 0) {
+                            kerja = true
+                            tv_masih_kerja.visibility = View.VISIBLE
+                            rv_lowongan.visibility = View.INVISIBLE
+
+                        } else {
+                            kerja = false
+                            tv_masih_kerja.visibility = View.INVISIBLE
+                            rv_lowongan.visibility = View.VISIBLE
+                            addLowongan()
+                        }
+                    }
+
+                    override fun onError(anError: ANError?) {
+                        Log.d("Cari error", anError!!.errorBody)
+                    }
+                })
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

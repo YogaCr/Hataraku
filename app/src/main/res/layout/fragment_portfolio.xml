@@ -28,19 +28,20 @@
                     android:text="Info Proposal"
                     android:textStyle="bold" />
 
-                <Spinner
+                <!--<Spinner
                     android:id="@+id/spin_kategoriLowongan"
                     android:padding="20dp"
                     android:entries="@array/kategori"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"/>
+                    android:clickable="false"/>-->
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/et_judul"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Judul" />
@@ -51,6 +52,7 @@
                     android:layout_height="wrap_content">
 
                     <EditText
+                        android:id="@+id/et_keterangan"
                         android:layout_width="match_parent"
                         android:layout_height="75dp"
                         android:gravity="top"
@@ -79,13 +81,16 @@
                     android:text="File (opsional)"
                     android:textStyle="bold" />
 
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="File" />
+                <EditText
+                    android:id="@+id/et_portfolio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="File" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
         <Button
+            android:id="@+id/btn_simpan"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

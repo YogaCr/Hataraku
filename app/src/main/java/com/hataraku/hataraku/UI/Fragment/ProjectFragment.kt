@@ -1,6 +1,7 @@
 package com.hataraku.hataraku.UI.Fragment
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
@@ -12,12 +13,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import androidx.navigation.Navigation.findNavController
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.hataraku.hataraku.Model.LowonganModel
 import com.hataraku.hataraku.R
+import com.hataraku.hataraku.UI.Activity.ExtendProfileActivity
 import com.hataraku.hataraku.UI.Adapter.LowonganAdapter
 import com.hataraku.hataraku.UI.Adapter.SlideAdapter
 import com.hataraku.hataraku.Utilities.ApiEndPoint
@@ -41,6 +44,12 @@ class ProjectFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_project, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+        initLowonganSaya()
+        initProyekSaya()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activity?.title = "Proyek"
@@ -50,14 +59,15 @@ class ProjectFragment : Fragment() {
             cv_proyek.visibility = View.VISIBLE
             rv_proyek_saya.layoutManager = LinearLayoutManager(context!!)
             rv_proyek_saya.adapter = LowonganAdapter(proyekList, context!!)
-            initProyekSaya()
         } else {
             ly_daftar_tukang.visibility = View.VISIBLE
             cv_proyek.visibility = View.GONE
         }
+        ly_daftar_tukang.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_projectFragment_to_daftarTukangActivity)
+        }
         rv_lowongan_saya.layoutManager = LinearLayoutManager(context!!)
         rv_lowongan_saya.adapter = LowonganAdapter(lowonganList, context!!)
-        initLowonganSaya()
         viewPager = view.findViewById(R.id.slider_pager) as ViewPager
         indicator = view.findViewById(R.id.indicator) as TabLayout
 
@@ -86,24 +96,45 @@ class ProjectFragment : Fragment() {
     private fun initProyek() {
         var bundle = Bundle()
         proyek_bangun.setOnClickListener {
-            bundle.putString("kategori", "Pembangunan")
-            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
+            bundle.putInt("kategori", 1)
+            navigateProyek(it, R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_renov.setOnClickListener {
-            bundle.putString("kategori", "Renovasi/Perbaikan")
-            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
+            bundle.putInt("kategori", 2)
+            navigateProyek(it, R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_cat.setOnClickListener {
-            bundle.putString("kategori", "Cat/Wallpaper")
-            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
+            bundle.putInt("kategori", 3)
+            navigateProyek(it, R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_ledeng.setOnClickListener {
-            bundle.putString("kategori", "Listrik")
-            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
+            bundle.putInt("kategori", 5)
+            navigateProyek(it, R.id.action_projectFragment_to_extendActivity, bundle)
         }
         proyek_listrik.setOnClickListener {
-            bundle.putString("kategori", "Ledeng")
-            findNavController(it).navigate(R.id.action_projectFragment_to_extendActivity, bundle)
+            bundle.putInt("kategori", 4)
+            navigateProyek(it, R.id.action_projectFragment_to_extendActivity, bundle)
+        }
+    }
+
+    fun navigateProyek(v: View, dest: Int, bundle: Bundle) {
+        if (pref.getBoolean(Preferences.SUDAH_RATING.name, true)) {
+            if (pref.getString(Preferences.ABOUT.name, "").equals("") ||
+                    pref.getString(Preferences.ALAMAT.name, "").equals("") ||
+                    pref.getString(Preferences.NO_HP.name, "").equals("") ||
+                    pref.getString(Preferences.KELAMIN.name, "").equals("") ||
+                    pref.getString(Preferences.TGL_LAHIR.name, "").equals("") ||
+                    pref.getString(Preferences.NAMA.name, "").equals("")) {
+                Toasty.info(context!!, "Anda harus melengkapi profil anda terlebih dahulu").show()
+                val intent = Intent(context!!, ExtendProfileActivity::class.java)
+                startActivity(intent)
+            } else {
+                AndroidNetworking.cancelAll()
+                findNavController(v).navigate(dest, bundle)
+            }
+        } else {
+            val intent = Intent(context!!, RatingActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -122,6 +153,10 @@ class ProjectFragment : Fragment() {
                             val obj = arr.getJSONObject(x)
                             getLowongan(obj.getInt("id_lowongan"))
                             x = x.inc()
+                        }
+                        if (arr.length() == 0) {
+                            rv_proyek_saya.visibility = View.INVISIBLE
+                            tv_proyek_none.visibility = View.VISIBLE
                         }
                     }
 

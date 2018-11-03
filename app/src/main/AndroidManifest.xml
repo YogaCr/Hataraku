@@ -41,7 +41,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".UI.Activity.TransaksiActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".UI.Fragment.RatingActivity" />
+        <activity android:name=".UI.Fragment.DaftarTukangActivity"></activity>
     </application>
 
 </manifest>

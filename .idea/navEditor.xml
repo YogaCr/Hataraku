@@ -101,6 +101,12 @@
                   <entry key="lowonganFragment">
                     <value>
                       <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="177" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_lowonganFragment_to_lowonganNextFragment">
@@ -115,12 +121,26 @@
                   </entry>
                   <entry key="lowonganNextFragment">
                     <value>
-                      <LayoutPositions />
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="430" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
                     </value>
                   </entry>
                   <entry key="transaksiFragment">
                     <value>
-                      <LayoutPositions />
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
                     </value>
                   </entry>
                 </map>
@@ -135,26 +155,12 @@
                 <map>
                   <entry key="biodataFragment">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="12" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="transaksiHistoryFragment">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="177" />
-                            <option name="y" value="12" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                 </map>
@@ -170,12 +176,6 @@
                   <entry key="lowonganDetailFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-11" />
-                            <option name="y" value="90" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_lowonganDetailFragment_to_tawaranFragment">
@@ -188,7 +188,17 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_lowonganDetailFragment_to_transaksiFragment2">
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="portfolioFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_portfolioFragment_to_tawaranFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -201,15 +211,14 @@
                   <entry key="tawaranFragment">
                     <value>
                       <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="221" />
-                            <option name="y" value="354" />
-                          </Point>
-                        </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_tawaranFragment_to_lowonganDetailFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_tawaranFragment_to_portfolioFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -221,35 +230,7 @@
                   </entry>
                   <entry key="tawaranNextFragment">
                     <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="185" />
-                            <option name="y" value="-297" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_tawaranNextFragment_to_transaksiFragment2">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="transaksiFragment2">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="467" />
-                            <option name="y" value="-7" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
+                      <LayoutPositions />
                     </value>
                   </entry>
                 </map>
@@ -273,12 +254,29 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_cariFragment_to_daftarTukangActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_cariFragment_to_extendTawaranActivity">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="daftarTukangActivity">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="642" />
+                            <option name="y" value="320" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -300,8 +298,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="265" />
-                            <option name="y" value="280" />
+                            <option name="x" value="303" />
+                            <option name="y" value="352" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -351,6 +349,11 @@
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_projectFragment_to_daftarTukangActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_projectFragment_to_extendActivity">
                               <value>
                                 <LayoutPositions />

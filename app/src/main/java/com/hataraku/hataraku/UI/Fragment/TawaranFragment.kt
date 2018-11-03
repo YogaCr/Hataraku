@@ -34,13 +34,14 @@ class TawaranFragment : Fragment() {
     var year = 0
     var day = 0
     var month = 0
+    val listPortofolio: MutableList<PortfolioModel> = mutableListOf()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tawaran, container, false)
     }
 
-    val listPortofolio: MutableList<PortfolioModel> = mutableListOf()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -64,13 +65,17 @@ class TawaranFragment : Fragment() {
         }
         initPortfolio()
         btn_simpan_tawaran.setOnClickListener {
+            var portfolio = " "
+            if (listPortofolio.size > 0) {
+                portfolio = listPortofolio[spin_portofolio.selectedItemPosition].id.toString()
+            }
             AndroidNetworking.post(ApiEndPoint.TAWARAN.value)
                     .addHeaders("Content-Type", "application/json")
                     .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
                     .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
                     .addBodyParameter("id_user", pref.getInt(Preferences.ID_USER.name, 0).toString())
                     .addBodyParameter("id_lowongan", arguments?.getInt("id").toString())
-                    .addBodyParameter("id_portfolio", listPortofolio[spin_portofolio.selectedItemPosition].id.toString())
+                    .addBodyParameter("id_portfolio", portfolio)
                     .addBodyParameter("proposal", et_proposal.text.toString())
                     .addBodyParameter("tarif", et_tarif.text.toString())
                     .addBodyParameter("file", "")
@@ -87,6 +92,11 @@ class TawaranFragment : Fragment() {
                         }
                     })
 
+        }
+        tv_tambahPortfilio.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putInt("id_kategori", arguments!!.getInt("id_kategori"))
+            Navigation.findNavController(view).navigate(R.id.action_tawaranFragment_to_portfolioFragment, bundle)
         }
     }
 

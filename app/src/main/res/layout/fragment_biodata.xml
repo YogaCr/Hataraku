@@ -8,65 +8,98 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:padding="8dp">
+
         <com.mikhaellopez.circularimageview.CircularImageView
             android:id="@+id/iv_profile"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_launcher"
+            android:layout_marginBottom="8dp"
             android:padding="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:src="@mipmap/ic_launcher" />
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
             <EditText
+                android:id="@+id/et_nama"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Nama" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
             <EditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email" />
         </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
 
-            <EditText
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="8dp"
+            android:text="No.HP" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="No. HP" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                android:layout_weight="0.9"
+                android:text="+62" />
 
             <EditText
+                android:id="@+id/et_hp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.1"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <EditText
+                android:id="@+id/et_about"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
                 android:gravity="top"
                 android:hint="About"
                 android:inputType="text|textMultiLine" />
         </android.support.design.widget.TextInputLayout>
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="8dp">
 
             <EditText
+                android:id="@+id/et_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="top"
                 android:hint="Alamat"
-                android:inputType="text|textMultiLine"
-                android:gravity="top"/>
+                android:inputType="text|textMultiLine" />
         </android.support.design.widget.TextInputLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -87,18 +120,21 @@
                 android:focusable="false"
                 android:hint="20-09-2018" />
         </LinearLayout>
+
         <Spinner
-            android:padding="20dp"
             android:id="@+id/spin_jenisKelamin"
-            android:entries="@array/jenis_kelamin"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:entries="@array/jenis_kelamin"
+            android:padding="20dp" />
+
         <Button
+            android:id="@+id/btn_simpan_profile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:background="@drawable/button_auth"
-            android:layout_gravity="center"
             android:text="Simpan"
             android:textAllCaps="false"
             android:textColor="@android:color/white"

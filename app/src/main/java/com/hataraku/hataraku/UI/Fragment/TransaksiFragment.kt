@@ -10,10 +10,13 @@ import android.view.ViewGroup
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog
+import com.github.javiersantos.materialstyleddialogs.enums.Style
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.Utilities.ApiEndPoint
 import com.hataraku.hataraku.Utilities.Preferences
 import dmax.dialog.SpotsDialog
+import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_transaksi.*
 import org.json.JSONObject
 
@@ -29,6 +32,39 @@ class TransaksiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pref = activity!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
+        btn_selesai.setOnClickListener {
+            Toasty.info(context!!, "Tes").show()
+            val confirm = MaterialStyledDialog.Builder(context!!).setTitle("Konfirmasi")
+                    .setDescription("Apakah anda yakin pekerjaan sudah selesai?")
+                    .setIcon(R.drawable.ic_info_outline_white_48dp)
+                    .setStyle(Style.HEADER_WITH_ICON)
+                    .setHeaderColor(R.color.colorPrimary)
+                    .setPositiveText("Iya")
+                    .setNegativeText("Tidak")
+                    .onPositive { _, _ ->
+                        /*AndroidNetworking.put(ApiEndPoint.TRANSAKSI.value + "/" + id_tawaran)
+                                .addHeaders("Content-Type", "application/json")
+                                .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
+                                .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                .addJSONObjectBody(JSONObject().put("status", 2).put("id_tukang", id_tukang))
+                                .build()
+                                .getAsJSONObject(object : JSONObjectRequestListener {
+                                    override fun onResponse(response: JSONObject?) {
+                                        Toasty.success(context!!, "Sukses", Toast.LENGTH_SHORT, true).show()
+                                        val intent = Intent(context!!, MainActivity::class.java)
+                                        intent.putExtra("id", activity?.intent?.getIntExtra("id", 1))
+                                        startActivity(intent)
+                                        activity!!.finish()
+                                    }
+
+                                    override fun onError(anError: ANError?) {
+
+                                    }
+                                })*/
+                    }
+                    .build()
+            confirm.show()
+        }
         val dialog = SpotsDialog.Builder()
                 .setContext(context!!)
                 .setMessage("Harap Tunggu")
@@ -45,10 +81,14 @@ class TransaksiFragment : Fragment() {
                 .getAsJSONObject(object : JSONObjectRequestListener {
                     override fun onResponse(response: JSONObject) {
                         val obj = response.getJSONArray("data").getJSONObject(0)
+                        val id_tukang = obj.getInt("id_user")
+                        val id_tawaran = obj.getInt("id")
                         tv_tukang_nama.text = obj.getString("nama")
                         tv_tukang_hp.text = obj.getString("no_hp")
                         tv_tarif.text = obj.getString("tarif")
                         tgl_selesai.text = obj.getString("tgl_selesai")
+
+
                         AndroidNetworking.get(ApiEndPoint.LOWONGAN.value + "/" + activity?.intent?.getIntExtra("id", 1))
                                 .addHeaders("Content-Type", "application/json")
                                 .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
@@ -64,6 +104,7 @@ class TransaksiFragment : Fragment() {
                                         tv_skill.text = ob.getString("skill")
                                         tv_alamat.text = ob.getString("alamat")
                                         dialog.dismiss()
+
                                     }
 
                                     override fun onError(anError: ANError?) {
@@ -77,5 +118,7 @@ class TransaksiFragment : Fragment() {
                     }
 
                 })
+
+
     }
 }
