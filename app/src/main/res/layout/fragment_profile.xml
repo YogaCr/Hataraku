@@ -99,7 +99,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="100 Behasil" />
+                            android:text="" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
@@ -136,7 +136,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="5" />
+                                android:text="" />
                         </LinearLayout>
                     </LinearLayout>
                 </android.support.v7.widget.CardView>

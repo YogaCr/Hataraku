@@ -28,6 +28,7 @@ import com.hataraku.hataraku.Utilities.Preferences
 import com.wajahatkarim3.easyvalidation.core.view_ktx.minLength
 import com.wajahatkarim3.easyvalidation.core.view_ktx.nonEmpty
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
+import dmax.dialog.SpotsDialog
 import es.dmoral.toasty.Toasty
 import kotlinx.android.synthetic.main.fragment_login.*
 import org.json.JSONObject
@@ -163,6 +164,8 @@ class LoginFragment : Fragment() {
             if (resultCode == Activity.RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 val account = task.getResult(ApiException::class.java)
+                val dialog = SpotsDialog.Builder().setContext(context!!).setMessage("Harap tunggu").setCancelable(false).build()
+                dialog.show()
                 AndroidNetworking.post(ApiEndPoint.AUTH_GOOGLE.value)
                         .addHeaders("Content-Type", "application/json")
                         .addHeaders("X-API-Key", resources.getString(R.string.x_api_key))
@@ -209,6 +212,7 @@ class LoginFragment : Fragment() {
                                                                 }
                                                                 edit.apply()
                                                                 googleSignInClient.signOut()
+                                                                dialog.dismiss()
                                                                 val intent = Intent(context, MainActivity::class.java)
                                                                 startActivity(intent)
                                                                 activity?.finish()

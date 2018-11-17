@@ -2,6 +2,7 @@ package com.hataraku.hataraku.UI.Fragment
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -10,7 +11,6 @@ import android.support.v7.widget.SearchView
 import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.navigation.Navigation
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -57,7 +57,8 @@ class CariFragment : Fragment() {
 
         }
         btn_daftar_tukang.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_projectFragment_to_daftarTukangActivity)
+            val i = Intent(activity!!, DaftarTukangActivity::class.java)
+            activity!!.startActivity(i)
         }
         rv_lowongan.layoutManager = LinearLayoutManager(context)
         rv_lowongan.adapter = LowonganAdapter(lowongan, context)

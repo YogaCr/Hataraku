@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.transaksi_layout.view.*
 
 
 class TransaksiAdapter(val items: MutableList<TransaksiModel>, val context: Context?) :
-        RecyclerView.Adapter<TransaksiAdapter.ViewHolder>(){
+        RecyclerView.Adapter<TransaksiAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater
@@ -27,14 +27,19 @@ class TransaksiAdapter(val items: MutableList<TransaksiModel>, val context: Cont
         val transaksi: TransaksiModel = items.get(position)
         holder.tv_judul.text = transaksi.judul
         holder.tv_kategori.text = transaksi.kategori
-        holder.tv_tgl.text = "Selesai: " + transaksi.tgl_selesai
+        when (transaksi.id_kategori) {
+            1 -> holder.iv_kategori.setImageResource(R.drawable.bata)
+            2 -> holder.iv_kategori.setImageResource(R.drawable.palu)
+            3 -> holder.iv_kategori.setImageResource(R.drawable.kuas)
+            4 -> holder.iv_kategori.setImageResource(R.drawable.listrik)
+            5 -> holder.iv_kategori.setImageResource(R.drawable.air)
+        }
     }
 
-    class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         // Holds the TextView that will add each animal to
         val tv_judul = view.txtJudulTrans
         val tv_kategori = view.txtKetTrans
-        val tv_tgl = view.txtTglTrans
-        val iv_profile = view.iv_Trans
+        val iv_kategori = view.iv_Trans
     }
 }

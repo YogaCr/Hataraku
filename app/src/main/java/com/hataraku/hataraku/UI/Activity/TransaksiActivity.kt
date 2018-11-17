@@ -28,15 +28,15 @@ class TransaksiActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaksi)
         val context = this
+        supportActionBar!!.title = "Detail Lowongan"
+        supportActionBar!!.elevation = 0f
         pref = getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
         val dialog = SpotsDialog.Builder()
                 .setContext(this)
                 .setMessage("Harap Tunggu")
                 .setCancelable(false)
                 .build()
-                .apply {
-                    show()
-                }
+        dialog.show()
         AndroidNetworking.get(ApiEndPoint.TAWARAN.value + "?id_lowongan=" + intent?.getIntExtra("id", 1) + "&status=3")
                 .addHeaders("Content-Type", "application/json")
                 .addHeaders("X-API-Key", resources?.getString(R.string.x_api_key))
@@ -51,7 +51,6 @@ class TransaksiActivity : AppCompatActivity() {
                         tv_tukang_hp.text = "+62" + obj.getString("no_hp")
                         tv_tarif.text = "Rp." + obj.getString("tarif")
                         tgl_selesai.text = obj.getString("tgl_selesai")
-
                         btn_selesai.setOnClickListener {
                             val confirm = MaterialStyledDialog.Builder(context).setTitle("Konfirmasi")
                                     .setDescription("Apakah anda yakin pekerjaan sudah selesai?")
@@ -101,6 +100,14 @@ class TransaksiActivity : AppCompatActivity() {
                                         tv_kategori.text = ob.getString("nama_kategori")
                                         tv_skill.text = ob.getString("skill")
                                         tv_alamat.text = ob.getString("alamat")
+                                        val kategori = ob.getInt("id_kategori")
+                                        when (kategori) {
+                                            1 -> iv_kategori.setImageResource(R.drawable.bata)
+                                            2 -> iv_kategori.setImageResource(R.drawable.palu)
+                                            3 -> iv_kategori.setImageResource(R.drawable.kuas)
+                                            4 -> iv_kategori.setImageResource(R.drawable.listrik)
+                                            5 -> iv_kategori.setImageResource(R.drawable.air)
+                                        }
                                         if (pref.getInt(Preferences.ID_USER.name, 0) != ob.getInt("id_user") || ob.getInt("status") != 3) {
                                             btn_selesai.visibility = View.INVISIBLE
                                         } else {
