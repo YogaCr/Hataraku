@@ -48,8 +48,8 @@ class TransaksiActivity : AppCompatActivity() {
                         val id_tukang = obj.getInt("id_user")
                         val id_tawaran = obj.getInt("id")
                         tv_tukang_nama.text = obj.getString("nama")
-                        tv_tukang_hp.text = obj.getString("no_hp")
-                        tv_tarif.text = obj.getString("tarif")
+                        tv_tukang_hp.text = "+62" + obj.getString("no_hp")
+                        tv_tarif.text = "Rp." + obj.getString("tarif")
                         tgl_selesai.text = obj.getString("tgl_selesai")
 
                         btn_selesai.setOnClickListener {
@@ -95,7 +95,7 @@ class TransaksiActivity : AppCompatActivity() {
                                 .getAsJSONObject(object : JSONObjectRequestListener {
                                     override fun onResponse(ob: JSONObject) {
                                         tv_nama_client.text = ob.getString("nama")
-                                        tv_client_hp.text = ob.getString("no_hp")
+                                        tv_client_hp.text = "+62" + ob.getString("no_hp")
                                         tv_judul.text = ob.getString("judul")
                                         tv_isi.text = ob.getString("isi")
                                         tv_kategori.text = ob.getString("nama_kategori")

@@ -62,6 +62,7 @@ class LowonganFragment : Fragment() {
                 bundle.putString("skill", et_skill.text.toString())
                 bundle.putString("alamat", et_alamat.text.toString())
                 bundle.putString("budget", et_budget.text.toString())
+                bundle.putInt("kategori", spin_kategoriLowongan.selectedItemPosition)
                 bundle.putString("tgl_akhir", y.toString() + "-" + month + "-" + day)
                 Navigation.findNavController(view).navigate(R.id.action_lowonganFragment_to_lowonganNextFragment, bundle)
             }

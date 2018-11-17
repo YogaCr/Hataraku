@@ -48,13 +48,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:text="Oleh: Yoga Aranggi"
-                        android:id="@+id/txtOlehTrans"
-                        android:textSize="6pt"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="18dp"
@@ -67,14 +60,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
-                <TextView
-                    android:paddingTop="4dp"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:text="Rp. 1.000.000"
-                    android:id="@+id/txtBudgetTrans"
-                    android:textStyle="bold"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

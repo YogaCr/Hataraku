@@ -16,6 +16,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.google.android.gms.auth.api.Auth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -239,6 +240,7 @@ class LoginFragment : Fragment() {
 
             } else {
                 Toasty.error(this.context!!, "Login gagal", Toast.LENGTH_SHORT, true).show()
+                Log.d("Error Login", Auth.GoogleSignInApi.getSignInResultFromIntent(data).status.statusMessage)
             }
         }
     }

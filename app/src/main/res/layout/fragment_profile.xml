@@ -154,7 +154,9 @@
                     android:text="Skill" />
             </android.support.v7.widget.CardView>-->
         </LinearLayout>
-        <!--<android.support.v7.widget.CardView
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_Pekerjaan"
             android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -168,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="8pt"
-                    android:text="Transaksi"/>
+                    android:text="Pekerjaan Selesai" />
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_transaksi"
                     android:layout_width="match_parent"
@@ -176,7 +178,6 @@
                     android:paddingTop="8dp" />
             </LinearLayout>
         </android.support.v7.widget.CardView>
--->
     </LinearLayout>
 
 </android.support.v4.widget.NestedScrollView>

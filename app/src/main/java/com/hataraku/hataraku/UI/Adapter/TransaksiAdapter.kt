@@ -10,7 +10,7 @@ import com.hataraku.hataraku.R
 import kotlinx.android.synthetic.main.transaksi_layout.view.*
 
 
-class TransaksiAdapter(val items: ArrayList<TransaksiModel>, val context: Context?):
+class TransaksiAdapter(val items: MutableList<TransaksiModel>, val context: Context?) :
         RecyclerView.Adapter<TransaksiAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,11 +25,9 @@ class TransaksiAdapter(val items: ArrayList<TransaksiModel>, val context: Contex
 
     override fun onBindViewHolder(holder: TransaksiAdapter.ViewHolder, position: Int) {
         val transaksi: TransaksiModel = items.get(position)
-        holder?.tv_judul.text = transaksi.judul
-        holder?.tv_kategori.text = transaksi.kategori
-        holder?.tv_tgl.text = "Selesai: " + transaksi.tgl_selesai
-        holder?.tv_oleh.text = "Dikerjakan Oleh:" + transaksi.oleh
-        holder?.tv_budget.text = "Rp. " + transaksi.tarif
+        holder.tv_judul.text = transaksi.judul
+        holder.tv_kategori.text = transaksi.kategori
+        holder.tv_tgl.text = "Selesai: " + transaksi.tgl_selesai
     }
 
     class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
@@ -37,8 +35,6 @@ class TransaksiAdapter(val items: ArrayList<TransaksiModel>, val context: Contex
         val tv_judul = view.txtJudulTrans
         val tv_kategori = view.txtKetTrans
         val tv_tgl = view.txtTglTrans
-        val tv_budget = view.txtBudgetTrans
-        val tv_oleh = view.txtOlehTrans
         val iv_profile = view.iv_Trans
     }
 }

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.*
 import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
@@ -14,6 +15,7 @@ import com.hataraku.hataraku.Model.TransaksiModel
 import com.hataraku.hataraku.R
 import com.hataraku.hataraku.UI.Activity.AuthActivity
 import com.hataraku.hataraku.UI.Activity.ExtendProfileActivity
+import com.hataraku.hataraku.UI.Adapter.TransaksiAdapter
 import com.hataraku.hataraku.Utilities.ApiEndPoint
 import com.hataraku.hataraku.Utilities.Preferences
 import es.dmoral.toasty.Toasty
@@ -22,7 +24,7 @@ import org.json.JSONObject
 
 class ProfileFragment : Fragment() {
 
-    val transaksi: ArrayList<TransaksiModel> = ArrayList()
+    val transaksi: MutableList<TransaksiModel> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -37,7 +39,12 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         pref = context!!.getSharedPreferences(Preferences.HatarakuPreferences.name, Context.MODE_PRIVATE)
+        cv_Pekerjaan.visibility = View.INVISIBLE
+        /*if (!pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
+            cv_Pekerjaan.visibility = View.INVISIBLE
+        }*/
         activity?.title = "Profil"
         tv_nama.text = pref.getString(Preferences.NAMA.name, "")
         if (!pref.getBoolean(Preferences.IS_TUKANG.name, false)) {
@@ -49,23 +56,15 @@ class ProfileFragment : Fragment() {
         if (!pref.getString(Preferences.NO_HP.name, "").equals("")) {
             tv_no_hp.text = "+62" + pref.getString(Preferences.NO_HP.name, "")
         }
-//        addTransaksi()
-        /*rv_transaksi.layoutManager = LinearLayoutManager(context)
-        rv_transaksi.adapter = TransaksiAdapter(transaksi, context)*/
+        addTransaksi()
+        rv_transaksi.layoutManager = LinearLayoutManager(context)
+        rv_transaksi.adapter = TransaksiAdapter(transaksi, context)
     }
 
-    /*private fun addTransaksi() {
-        var x = 10
-        val trans: TransaksiModel = TransaksiModel(
-                "Pembangunan Rumah", "Bangunan", "22-09-2018",
-                1000000.0, "Yoga Aranggi",
-                1, 5.0)
-        while (x > 0) {
-            transaksi.add(trans)
-            x--
-        }
+    private fun addTransaksi() {
+
     }
-*/
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater?.inflate(R.menu.profile_menu, menu)

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="jenis_kelamin">
-        <item>Jenis Kelamin</item>
         <item>Laki-Laki</item>
         <item>Perempuan</item>
     </string-array>

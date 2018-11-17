@@ -31,6 +31,7 @@ import java.math.BigDecimal
 
 class LowonganDetailFragment : Fragment() {
     lateinit var pref: SharedPreferences
+    var status = 1
     val tawaran: MutableList<TawaranModel> = mutableListOf()
 
     lateinit var dialog: AlertDialog
@@ -72,55 +73,69 @@ class LowonganDetailFragment : Fragment() {
                         tv_isi.text = response.getString("isi")
                         tv_judul.text = response.getString("judul")
                         tv_skill.text = response.getString("skill")
+                        tv_kategori.text = response.getString("nama_kategori")
+                        status = response.getInt("status")
                         val kategori = response.getInt("id_kategori")
+                        when (kategori) {
+                            1 -> iv_kategori.setImageResource(R.drawable.bata)
+                            2 -> iv_kategori.setImageResource(R.drawable.palu)
+                            3 -> iv_kategori.setImageResource(R.drawable.kuas)
+                            4 -> iv_kategori.setImageResource(R.drawable.listrik)
+                            5 -> iv_kategori.setImageResource(R.drawable.air)
+                        }
                         if (response.getInt("id_user") == pref.getInt(Preferences.ID_USER.name, 0)) {
                             rv_tawaran.adapter = TawaranAdapter(tawaran, context!!, true)
                             activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.visibility = View.INVISIBLE
                         } else {
                             rv_tawaran.adapter = TawaranAdapter(tawaran, context!!, false)
                         }
-                        activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.setOnClickListener {
-                            dialog.show()
-                            AndroidNetworking.get(ApiEndPoint.TAWARAN.value + "?id_user=" + pref.getInt(Preferences.ID_USER.name, 0) + "&id_lowongan=" + activity?.intent?.getIntExtra("id", 1))
-                                    .addHeaders("Content-Type", "application/json")
-                                    .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
-                                    .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
-                                    .build()
-                                    .getAsJSONObject(object : JSONObjectRequestListener {
-                                        override fun onResponse(response: JSONObject) {
-                                            val arr = response.getJSONArray("data")
-                                            if (arr.length() > 0) {
-                                                Toasty.error(context!!, "Anda sudah memberikan tawaran sebelumnya", Toast.LENGTH_SHORT, true).show()
-                                            } else {
-                                                if (pref.getString(Preferences.ABOUT.name, "").equals("") ||
-                                                        pref.getString(Preferences.ALAMAT.name, "").equals("") ||
-                                                        pref.getString(Preferences.NO_HP.name, "").equals("") ||
-                                                        pref.getString(Preferences.KELAMIN.name, "").equals("") ||
-                                                        pref.getString(Preferences.TGL_LAHIR.name, "").equals("") ||
-                                                        pref.getString(Preferences.NAMA.name, "").equals("")) {
-                                                    Toasty.info(context!!, "Anda harus melengkapi profil anda terlebih dahulu").show()
-                                                    val intent = Intent(context!!, ExtendProfileActivity::class.java)
-                                                    startActivity(intent)
+                        if (status != 2) {
+                            activity?.findViewById<FloatingActionButton>(R.id.fab_tawaran)?.setOnClickListener {
+                                dialog.show()
+                                AndroidNetworking.get(ApiEndPoint.TAWARAN.value + "?id_user=" + pref.getInt(Preferences.ID_USER.name, 0) + "&id_lowongan=" + activity?.intent?.getIntExtra("id", 1))
+                                        .addHeaders("Content-Type", "application/json")
+                                        .addHeaders("X-API-Key", activity?.resources?.getString(R.string.x_api_key))
+                                        .addHeaders("Authorization", "Bearer " + pref.getString(Preferences.API_KEY.name, ""))
+                                        .build()
+                                        .getAsJSONObject(object : JSONObjectRequestListener {
+                                            override fun onResponse(response: JSONObject) {
+                                                val arr = response.getJSONArray("data")
+                                                if (arr.length() > 0) {
+                                                    Toasty.error(context!!, "Anda sudah memberikan tawaran sebelumnya", Toast.LENGTH_SHORT, true).show()
                                                 } else {
-                                                    val Bundle = Bundle()
-                                                    Bundle.putInt("id", activity?.intent?.getIntExtra("id", 0)!!)
-                                                    Bundle.putInt("id_kategori", kategori)
-                                                    it.visibility = View.INVISIBLE
-                                                    Navigation.findNavController(view).navigate(R.id.action_lowonganDetailFragment_to_tawaranFragment, Bundle)
+                                                    if (pref.getString(Preferences.ABOUT.name, "").equals("") ||
+                                                            pref.getString(Preferences.ALAMAT.name, "").equals("") ||
+                                                            pref.getString(Preferences.NO_HP.name, "").equals("") ||
+                                                            pref.getString(Preferences.KELAMIN.name, "").equals("") ||
+                                                            pref.getString(Preferences.TGL_LAHIR.name, "").equals("") ||
+                                                            pref.getString(Preferences.NAMA.name, "").equals("")) {
+                                                        Toasty.info(context!!, "Anda harus melengkapi profil anda terlebih dahulu").show()
+                                                        val intent = Intent(context!!, ExtendProfileActivity::class.java)
+                                                        startActivity(intent)
+                                                    } else {
+                                                        val Bundle = Bundle()
+                                                        Bundle.putInt("id", activity?.intent?.getIntExtra("id", 0)!!)
+                                                        Bundle.putInt("id_kategori", kategori)
+                                                        it.visibility = View.INVISIBLE
+                                                        Navigation.findNavController(view).navigate(R.id.action_lowonganDetailFragment_to_tawaranFragment, Bundle)
+                                                    }
                                                 }
+                                                dialog.dismiss()
                                             }
-                                            dialog.dismiss()
-                                        }
 
-                                        override fun onError(anError: ANError?) {
+                                            override fun onError(anError: ANError?) {
 
-                                        }
+                                            }
 
-                                    })
+                                        })
 
+                            }
+                            initTawaran()
+                        } else {
+                            tv_done.visibility = View.VISIBLE
+                            ly_tawaran.visibility = View.INVISIBLE
+                            dialog.dismiss()
                         }
-
-                        initTawaran()
                     }
 
                     override fun onError(anError: ANError?) {

@@ -43,6 +43,14 @@ class LowonganNextFragment : Fragment() {
         tv_skill.text = arguments!!.getString("skill")
         tv_budget.text = "Rp. " + arguments!!.getString("budget")
         tv_batas.text = arguments!!.getString("tgl_akhir")
+        val kategori = arguments!!.getInt("kategori")
+        when (kategori) {
+            1 -> iv_kategori.setImageResource(R.drawable.bata)
+            2 -> iv_kategori.setImageResource(R.drawable.palu)
+            3 -> iv_kategori.setImageResource(R.drawable.kuas)
+            4 -> iv_kategori.setImageResource(R.drawable.listrik)
+            5 -> iv_kategori.setImageResource(R.drawable.air)
+        }
         btn_simpan_lowongan.setOnClickListener {
             AndroidNetworking.post(ApiEndPoint.LOWONGAN.value)
                     .addHeaders("Content-Type", "application/json")
